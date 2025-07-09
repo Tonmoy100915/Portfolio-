@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohmmad Reza Uddin Tonmoy - Graphic Designer & Web Developer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide-react@latest/dist/lucide-react.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* A light grey background */
+        }
+        .hero-bg {
+            background-color: #111827; /* Dark background for hero */
+        }
+        .section-title {
+            @apply text-3xl font-bold text-gray-800 mb-8 text-center;
+        }
+        .card {
+            @apply bg-white rounded-xl shadow-lg overflow-hidden transform transition-transform duration-300 hover:-translate-y-2;
+        }
+        .btn {
+            @apply px-6 py-3 rounded-lg font-semibold transition-colors duration-300;
+        }
+        .btn-primary {
+            @apply bg-blue-600 text-white hover:bg-blue-700;
+        }
+        .btn-secondary {
+            @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
+        }
+        .icon-circle {
+            @apply w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4;
+        }
+    </style>
+</head>
+<body class="text-gray-700">
+
+    <!-- Header -->
+    <header id="header" class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gray-800">Tonmoy</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-600 hover:text-blue-600">Home</a>
+                <a href="#about" class="text-gray-600 hover:text-blue-600">About</a>
+                <a href="#skills" class="text-gray-600 hover:text-blue-600">Skills</a>
+                <a href="#portfolio" class="text-gray-600 hover:text-blue-600">Portfolio</a>
+                <a href="#contact" class="text-gray-600 hover:text-blue-600">Contact</a>
+            </div>
+            <a href="#contact" class="hidden md:block btn btn-primary">Hire Me</a>
+             <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4">
+            <a href="#home" class="block py-2 text-gray-600 hover:text-blue-600">Home</a>
+            <a href="#about" class="block py-2 text-gray-600 hover:text-blue-600">About</a>
+            <a href="#skills" class="block py-2 text-gray-600 hover:text-blue-600">Skills</a>
+            <a href="#portfolio" class="block py-2 text-gray-600 hover:text-blue-600">Portfolio</a>
+            <a href="#contact" class="block py-2 text-gray-600 hover:text-blue-600">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-bg text-white py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <img src="photo/WhatsApp Image 2025-07-09 at 21.12.13_85cd030b.jpg" alt="Mohmmad Reza Uddin Tonmoy" class="w-42 h-40 rounded-full mx-auto mb-6 border-4 border-blue-500 shadow-lg">
+                <h1 class="text-4xl md:text-6xl font-bold mb-3">Mohmmad Reza Uddin Tonmoy</h1>
+                <p class="text-lg md:text-2xl text-blue-300 mb-8">Graphic Designer & Web Developer</p>
+                <div class="space-x-4">
+                    <a href="#portfolio" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">About Me</h2>
+                <div class="max-w-4xl mx-auto text-center">
+                    <p class="text-lg mb-4">
+                        Hello! I'm Tonmoy, a passionate and creative individual currently pursuing my studies at Port City International University. My journey in the digital world is driven by a dual passion for aesthetics and functionality.
+                    </p>
+                    <p class="text-lg mb-4">
+                        As a graphic designer, I love bringing ideas to life with visually compelling designs. From logos to complete brand identities, I enjoy the process of creating something beautiful and meaningful.
+                    </p>
+                    <p class="text-lg">
+                        As a web developer, I focus on building clean, modern, and user-friendly websites. I believe a great website is not just about how it looks, but also how it works and the experience it provides to the user. I'm constantly learning and exploring new technologies to improve my craft.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Education Section -->
+        <section id="education" class="bg-white py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Education</h2>
+                <div class="max-w-2xl mx-auto card p-8 text-center">
+                    <div class="icon-circle mx-auto">
+                        <i data-lucide="graduation-cap" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-2">Port City International University</h3>
+                    <p class="text-gray-500 mb-4">Chattogram, Bangladesh</p>
+                    <p class="text-lg">
+                        I am currently enhancing my knowledge and skills at this esteemed institution, focusing on subjects that align with my passion for technology and design. My coursework provides me with a strong theoretical foundation which I enjoy applying to practical, real-world projects.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">My Skills</h2>
+                <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                    <!-- Graphic Design Skills -->
+                    <div class="card p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="icon-circle mr-4 flex-shrink-0">
+                                <i data-lucide="palette" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800">Graphic Design</h3>
+                        </div>
+                        <ul class="space-y-4">
+                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> Adobe Photoshop</li>
+                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> Adobe Illustrator</li>
+                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> Figma</li>
+                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> Logo Design & Branding</li>
+                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> UI/UX Principles</li>
+                        </ul>
+                    </div>
+                    <!-- Web Development Skills -->
+                    <div class="card p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="icon-circle mr-4 flex-shrink-0">
+                                <i data-lucide="code" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800">Web Development</h3>
+                        </div>
+                        <ul class="space-y-4">
+                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> HTML5 & CSS3</li>
+                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> JavaScript (ES6+)</li>
+                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> Tailwind CSS</li>
+                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> React.js</li>
+                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> Responsive Design</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="bg-white py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Portfolio</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project 1 -->
+                    <div class="card">
+                        <img src="https://placehold.co/600x400/3B82F6/FFFFFF?text=Project+One" alt="Project 1" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Corporate Branding</h3>
+                            <p class="mb-4">A complete branding package for a fictional tech startup, including logo, color palette, and business cards.</p>
+                            <a href="#" class="font-semibold text-blue-600 hover:underline">View Details &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="card">
+                        <img src="https://placehold.co/600x400/10B981/FFFFFF?text=Project+Two" alt="Project 2" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">E-commerce Website</h3>
+                            <p class="mb-4">A responsive e-commerce front-end built with React, featuring a clean UI and product filtering.</p>
+                            <a href="#" class="font-semibold text-blue-600 hover:underline">View Details &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Project 3 -->
+                    <div class="card">
+                        <img src="https://placehold.co/600x400/F59E0B/FFFFFF?text=Project+Three" alt="Project 3" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Mobile App UI Kit</h3>
+                            <p class="mb-4">A modern and user-friendly UI kit for a social networking app, designed in Figma.</p>
+                            <a href="#" class="font-semibold text-blue-600 hover:underline">View Details &rarr;</a>
+                        </div>
+                    </div>
+                     <!-- Project 4 -->
+                    <div class="card">
+                        <img src="https://placehold.co/600x400/6366F1/FFFFFF?text=Project+Four" alt="Project 4" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Portfolio Website Template</h3>
+                            <p class="mb-4">A sleek and animated personal portfolio template built with HTML, CSS, and JavaScript.</p>
+                            <a href="#" class="font-semibold text-blue-600 hover:underline">View Details &rarr;</a>
+                        </div>
+                    </div>
+                     <!-- Project 5 -->
+                    <div class="card">
+                        <img src="https://placehold.co/600x400/EC4899/FFFFFF?text=Project+Five" alt="Project 5" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Event Posters</h3>
+                            <p class="mb-4">A collection of vibrant and eye-catching posters designed for various university events.</p>
+                            <a href="#" class="font-semibold text-blue-600 hover:underline">View Details &rarr;</a>
+                        </div>
+                    </div>
+                     <!-- Project 6 -->
+                    <div class="card">
+                        <img src="https://placehold.co/600x400/8B5CF6/FFFFFF?text=Project+Six" alt="Project 6" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Dashboard UI</h3>
+                            <p class="mb-4">A data visualization dashboard UI with a focus on clean layout and intuitive charts, designed in Figma.</p>
+                            <a href="#" class="font-semibold text-blue-600 hover:underline">View Details &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="max-w-3xl mx-auto card p-8">
+                    <p class="text-center text-lg mb-8">
+                        I'm currently available for freelance work and new opportunities. If you have a project in mind or just want to say hello, feel free to reach out!
+                    </p>
+                    <form id="contact-form">
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <input type="text" placeholder="Your Name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <input type="email" placeholder="Your Email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <textarea placeholder="Your Message" rows="5" class="w-full p-3 border border-gray-300 rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary w-full md:w-auto">Send Message</button>
+                        </div>
+                    </form>
+                    <div id="form-message" class="text-center mt-4"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="hover:text-blue-400"><i data-lucide="github" class="w-6 h-6"></i></a>
+                <a href="#" class="hover:text-blue-400"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+                <a href="#" class="hover:text-blue-400"><i data-lucide="dribbble" class="w-6 h-6"></i></a>
+            </div>
+            <p>mail:md.rezauddin2002@gmail.com 
+                <br>WhatsApp: +8801639056199
+            </p>
+            <p>&copy; 2024 Mohmmad Reza Uddin Tonmoy. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu on link click
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Contact Form Submission
+        const contactForm = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            formMessage.textContent = 'Thank you for your message! I will get back to you soon.';
+            formMessage.className = 'text-center mt-4 text-green-600';
+            contactForm.reset();
+            setTimeout(() => {
+                formMessage.textContent = '';
+            }, 5000);
+        });
+        
+        // Header shadow on scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-lg');
+            } else {
+                header.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>
