@@ -1,317 +1,481 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" data-theme="light" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohmmad Reza Uddin Tonmoy - Graphic Designer & Web Developer</title>
+    <title>Mohmmad Reza Uddin Tonmoy - Smart Portfolio</title>
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.2/dist/full.min.css" rel="stylesheet" type="text/css" />
     
-    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide-react@latest/dist/lucide-react.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f2f5; /* A light grey background */
+        /* General Styles */
+        body { font-family: 'Inter', sans-serif; }
+        .hero-bg { 
+            background-color: #1f2937; 
+            background-image: linear-gradient(135deg, #111827 0%, #1f2937 100%);
         }
-        .hero-bg {
-            background-color: #111827; /* Dark background for hero */
+        .section-title { @apply text-4xl font-extrabold text-gray-800 mb-12 text-center; }
+
+        /* Animation for sections */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .section-title {
-            @apply text-3xl font-bold text-gray-800 mb-8 text-center;
+        section {
+            animation: fadeIn 0.7s ease-out forwards;
         }
-        .card {
-            @apply bg-white rounded-xl shadow-lg overflow-hidden transform transition-transform duration-300 hover:-translate-y-2;
-        }
-        .btn {
-            @apply px-6 py-3 rounded-lg font-semibold transition-colors duration-300;
-        }
-        .btn-primary {
-            @apply bg-blue-600 text-white hover:bg-blue-700;
-        }
-        .btn-secondary {
-            @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
-        }
-        .icon-circle {
-            @apply w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4;
+
+        /* Styles for PDF/Print Mode */
+        @media print {
+            #header, footer, .no-print { display: none !important; }
+            body { background-color: white !important; }
+            .print-area { margin: 0; padding: 0; width: 100%; box-shadow: none; }
+            .project-item figure { display: none !important; }
+            .project-item { page-break-inside: avoid; }
+            .section-title, h3 { color: #1f2937 !important; }
+            .card { box-shadow: none !important; border: 1px solid #e5e7eb; }
         }
     </style>
 </head>
-<body class="text-gray-700">
+<body class="text-gray-700 bg-base-200">
 
-    <!-- Header -->
-    <header id="header" class="bg-white shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-gray-800">Tonmoy</a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="text-gray-600 hover:text-blue-600">Home</a>
-                <a href="#about" class="text-gray-600 hover:text-blue-600">About</a>
-                <a href="#skills" class="text-gray-600 hover:text-blue-600">Skills</a>
-                <a href="#portfolio" class="text-gray-600 hover:text-blue-600">Portfolio</a>
-                <a href="#contact" class="text-gray-600 hover:text-blue-600">Contact</a>
+    <div id="header" class="navbar bg-base-100 shadow-lg sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost md:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#certifications">Certifications</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><button id="print-cv-mobile" class="btn btn-sm btn-outline btn-warning mt-2 w-full no-print">Print CV</button></li>
+                </ul>
             </div>
-            <a href="#contact" class="hidden md:block btn btn-primary">Hire Me</a>
-             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
-        </nav>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4">
-            <a href="#home" class="block py-2 text-gray-600 hover:text-blue-600">Home</a>
-            <a href="#about" class="block py-2 text-gray-600 hover:text-blue-600">About</a>
-            <a href="#skills" class="block py-2 text-gray-600 hover:text-blue-600">Skills</a>
-            <a href="#portfolio" class="block py-2 text-gray-600 hover:text-blue-600">Portfolio</a>
-            <a href="#contact" class="block py-2 text-gray-600 hover:text-blue-600">Contact</a>
+            <a href="#" class="btn btn-ghost text-2xl font-extrabold text-primary">Tonmoy</a>
         </div>
-    </header>
-
-    <main>
-        <!-- Hero Section -->
+        <div class="navbar-center hidden md:flex">
+            <ul class="menu menu-horizontal px-1 font-semibold">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="navbar-end space-x-2">
+            <button id="print-cv-desktop" class="btn btn-warning btn-sm no-print hidden md:inline-flex">
+                <i data-lucide="printer" class="w-4 h-4"></i> Print CV
+            </button>
+            <a href="#contact" class="btn btn-primary btn-sm md:btn-md">Hire Me</a>
+        </div>
+    </div>
+    
+    <main id="print-area">
+        
         <section id="home" class="hero-bg text-white py-20 md:py-32">
             <div class="container mx-auto px-6 text-center">
-                <img src="photo/WhatsApp Image 2025-07-09 at 21.12.13_85cd030b.jpg" alt="Mohmmad Reza Uddin Tonmoy" class="w-42 h-40 rounded-full mx-auto mb-6 border-4 border-blue-500 shadow-lg">
+                <img src="photo/0.jpg" alt="Mohmmad Reza Uddin Tonmoy" class="w-40 h-40 rounded-full mx-auto mb-6 border-4 border-primary shadow-xl object-cover"> 
                 <h1 class="text-4xl md:text-6xl font-bold mb-3">Mohmmad Reza Uddin Tonmoy</h1>
-                <p class="text-lg md:text-2xl text-blue-300 mb-8">Graphic Designer & Web Developer</p>
-                <div class="space-x-4">
-                    <a href="#portfolio" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                <p id="smart-tagline" class="text-lg md:text-2xl text-blue-300 mb-8 font-medium">Graphic Designer & Web Developer</p>
+                <div id="smart-message" role="alert" class="alert alert-info max-w-lg mx-auto mb-6 hidden">
+                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+                    <span id="smart-message-text" class="font-semibold text-left"></span>
+                </div>
+                <div class="flex flex-wrap justify-center gap-4 no-print">
+                    <a href="#portfolio" class="btn btn-primary btn-lg">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary btn-lg">Get In Touch</a>
                 </div>
             </div>
         </section>
 
-        <!-- About Me Section -->
         <section id="about" class="py-20">
             <div class="container mx-auto px-6">
-                <h2 class="section-title">About Me</h2>
-                <div class="max-w-4xl mx-auto text-center">
-                    <p class="text-lg mb-4">
-                        Hello! I'm Tonmoy, a passionate and creative individual currently pursuing my studies at Port City International University. My journey in the digital world is driven by a dual passion for aesthetics and functionality.
-                    </p>
-                    <p class="text-lg mb-4">
-                        As a graphic designer, I love bringing ideas to life with visually compelling designs. From logos to complete brand identities, I enjoy the process of creating something beautiful and meaningful.
-                    </p>
-                    <p class="text-lg">
-                        As a web developer, I focus on building clean, modern, and user-friendly websites. I believe a great website is not just about how it looks, but also how it works and the experience it provides to the user. I'm constantly learning and exploring new technologies to improve my craft.
-                    </p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Education Section -->
-        <section id="education" class="bg-white py-20">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title">Education</h2>
-                <div class="max-w-2xl mx-auto card p-8 text-center">
-                    <div class="icon-circle mx-auto">
-                        <i data-lucide="graduation-cap" class="w-8 h-8"></i>
+                <h2 class="section-title">About Me & Education</h2>
+                <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                    <div class="card bg-base-100 shadow-xl p-8">
+                        <h3 class="text-2xl font-bold mb-4 text-primary">Professional Bio</h3>
+                        <p class="text-lg mb-4">Hello! I'm Tonmoy, a passionate and creative individual currently pursuing my studies at <strong>Port City International University</strong>. My journey in the digital world is driven by a dual passion for aesthetics and functionality.</p>
+                        <p class="text-lg mb-4">As a graphic designer, I love bringing ideas to life with visually compelling designs. I enjoy the process of creating something beautiful and meaningful.</p>
+                        <p class="text-lg">As a web developer, I focus on building clean, modern, and user-friendly websites using <strong>AI</strong>, <strong>HTML</strong>, <strong>Tailwind CSS</strong>, and <strong>JavaScript</strong> to deliver an excellent user experience.</p>
                     </div>
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-2">Port City International University</h3>
-                    <p class="text-gray-500 mb-4">Chattogram, Bangladesh</p>
-                    <p class="text-lg">
-                        I am currently enhancing my knowledge and skills at this esteemed institution, focusing on subjects that align with my passion for technology and design. My coursework provides me with a strong theoretical foundation which I enjoy applying to practical, real-world projects.
-                    </p>
-                </div>
-            </div>
-        </section>
 
-        <!-- Skills Section -->
-        <section id="skills" class="py-20">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title">My Skills</h2>
-                <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-                    <!-- Graphic Design Skills -->
-                    <div class="card p-8">
-                        <div class="flex items-center mb-6">
-                            <div class="icon-circle mr-4 flex-shrink-0">
-                                <i data-lucide="palette" class="w-8 h-8"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-gray-800">Graphic Design</h3>
-                        </div>
-                        <ul class="space-y-4">
-                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> Adobe Photoshop</li>
-                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> Adobe Illustrator</li>
-                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> Figma</li>
-                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> Logo Design & Branding</li>
-                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> UI/UX Principles</li>
-                        </ul>
-                    </div>
-                    <!-- Web Development Skills -->
-                    <div class="card p-8">
-                        <div class="flex items-center mb-6">
-                            <div class="icon-circle mr-4 flex-shrink-0">
-                                <i data-lucide="code" class="w-8 h-8"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-gray-800">Web Development</h3>
-                        </div>
-                        <ul class="space-y-4">
-                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> HTML5 & CSS3</li>
-                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> JavaScript (ES6+)</li>
-                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> Tailwind CSS</li>
-                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> React.js</li>
-                            <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i> Responsive Design</li>
+                    <div class="card bg-base-100 shadow-xl p-8">
+                        <h3 class="text-2xl font-bold mb-4 text-primary">Education</h3>
+                        <ul class="timeline timeline-vertical">
+                            <li>
+                                <div class="timeline-middle"><i data-lucide="graduation-cap" class="w-5 h-5 text-success"></i></div>
+                                <div class="timeline-end timeline-box bg-base-200 shadow-md p-4 mb-8">
+                                    <h4 class="font-semibold text-lg">Port City International University</h4>
+                                    <p class="text-sm text-gray-500">2023 - Present | Chattogram, Bangladesh</p>
+                                    <p class="mt-2">Focusing on subjects that align with my passion for Computer Science and Engineering.</p>
+                                </div>
+                                <hr/>
+                            </li>
+                            <li>
+                                <div class="timeline-middle"><i data-lucide="school" class="w-5 h-5 text-success"></i></div>
+                                <div class="timeline-end timeline-box bg-base-200 shadow-md p-4 mb-8">
+                                    <h4 class="font-semibold text-lg">HSC</h4>
+                                    <p class="text-sm text-gray-500">2020 - 2022 | Omargani M.E.S College</p>
+                                </div>
+                                <hr/>
+                            </li>
+                            <li>
+                                <div class="timeline-middle"><i data-lucide="school" class="w-5 h-5 text-success"></i></div>
+                                <div class="timeline-end timeline-box bg-base-200 shadow-md p-4">
+                                    <h4 class="font-semibold text-lg">KG to SSC</h4>
+                                    <p class="text-sm text-gray-500">2008 - 2019 | Chattogram Cantonment Board High School</p>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Portfolio Section -->
-        <section id="portfolio" class="bg-white py-20">
+        <section id="skills" class="py-20 bg-white">
             <div class="container mx-auto px-6">
-                <h2 class="section-title">Portfolio</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Project 1 -->
-                    <div class="card">
-                        <img src="photo/1.png" alt="Project 1" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Corporate Branding</h3>
-                            <p class="mb-4">A complete branding package for a fictional tech startup, including logo, color palette, and business cards.</p>
-                            <a href="#" class="font-semibold text-blue-600 hover:underline">View Details &rarr;</a>
+                <h2 class="section-title">Skills Matrix</h2>
+                <div class="max-w-6xl mx-auto">
+                    <p class="text-center text-lg mb-8 font-medium no-print">Click on a skill tag to filter the portfolio below! 👇</p>
+                    <div id="skill-tags-container" class="flex flex-wrap justify-center gap-3 mb-10 no-print"></div>
+
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="card bg-base-100 shadow-xl p-6">
+                            <h3 class="text-xl font-bold mb-2">Web Development</h3>
+                            <p class="text-sm text-gray-500 mb-4">HTML, CSS, JavaScript, Tailwind, DaisyUI, AI</p>
+                            <progress class="progress progress-primary w-full" value="100" max="100"></progress>
+                            <span class="text-sm text-right mt-1 font-semibold">Expert with AI (100%)</span>
                         </div>
-                    </div>
-                    <!-- Project 2 -->
-                    <div class="card">
-                        <img src="photo/2.JPG" alt="Project 2" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">E-commerce Website</h3>
-                            <p class="mb-4">A responsive e-commerce front-end built with React, featuring a clean UI and product filtering.</p>
-                            <a href="https://tonmoy100915.github.io/E-Commerce/" target="_blank" class="font-semibold text-blue-600 hover:underline">View Details &rarr;</a>
+                        <div class="card bg-base-100 shadow-xl p-6">
+                            <h3 class="text-xl font-bold mb-2">Graphic Design</h3>
+                            <p class="text-sm text-gray-500 mb-4">Photoshop</p>
+                            <progress class="progress progress-secondary w-full" value="90" max="100"></progress>
+                            <span class="text-sm text-right mt-1 font-semibold">Advanced (90%)</span>
                         </div>
-                    </div>
-                    <!-- Project 3 -->
-                    <div class="card">
-                        <img src="https://placehold.co/600x400/F59E0B/FFFFFF?text=Project+Three" alt="Project 3" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Mobile App UI Kit</h3>
-                            <p class="mb-4">A modern and user-friendly UI kit for a social networking app, designed in Figma.</p>
-                            <a href="sorry not work at this moment" target="_blank" class="font-semibold text-blue-600 hover:underline">View Details &rarr;</a>
-                        </div>
-                    </div>
-                     <!-- Project 4 -->
-                    <div class="card">
-                        <img src="photo/4.JPG" alt="Project 4" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Portfolio Website Template</h3>
-                            <p class="mb-4">A sleek and animated personal portfolio template built with HTML, CSS, and JavaScript.</p>
-                            <a href="https://tonmoy100915.github.io/Portfolio-/" target="_blank" class="font-semibold text-blue-600 hover:underline">View Details &rarr;</a>
-                        </div>
-                    </div>
-                     <!-- Project 5 -->
-                    <div class="card">
-                        <img src="photo/5.png" alt="Project 5" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Event Posters</h3>
-                            <p class="mb-4">A collection of vibrant and eye-catching posters designed for various university events.</p>
-                            <a href="#" class="font-semibold text-blue-600 hover:underline">View Details &rarr;</a>
-                        </div>
-                    </div>
-                     <!-- Project 6 -->
-                    <div class="card">
-                        <img src="photo/6.JPG" alt="Project 6" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">shop website</h3>
-                            <p class="mb-4">A data visualization dashboard UI with a focus on clean layout and intuitive charts, designed in website.</p>
-                            <a href="https://tonmoy100915.github.io/my-Smart-Shop/" target="_blank" class="font-semibold text-blue-600 hover:underline">View Details &rarr;</a>
+                        <div class="card bg-base-100 shadow-xl p-6">
+                            <h3 class="text-xl font-bold mb-2">Programming</h3>
+                            <p class="text-sm text-gray-500 mb-4">Python, Basic Concepts</p>
+                            <progress class="progress progress-accent w-full" value="60" max="100"></progress>
+                            <span class="text-sm text-right mt-1 font-semibold">Intermediate (60%)</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="py-20">
+        <section id="certifications" class="py-20 bg-base-200">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Certifications</h2>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div class="card bg-base-100 shadow-xl">
+                        <figure class="cursor-pointer" onclick="cert_modal_1.showModal()">
+                            <img src="photo/9.jpg" alt="Responsive Web Design Certificate" class="w-full h-48 object-cover"/>
+                        </figure>
+                        <div class="card-body p-6">
+                            <h3 class="card-title text-lg">Responsive Web Design</h3>
+                            <p class="text-sm text-gray-500">Programming Hero | Jan 2024</p>
+                            <div class="card-actions justify-end mt-2">
+                                <button class="btn btn-primary btn-sm no-print" onclick="cert_modal_1.showModal()">View Full</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card bg-base-100 shadow-xl">
+                        <figure class="cursor-pointer" onclick="cert_modal_2.showModal()">
+                            <img src="photo/7.jpg" alt="Adobe Photoshop Certificate" class="w-full h-48 object-cover"/>
+                        </figure>
+                        <div class="card-body p-6">
+                            <h3 class="card-title text-lg">Adobe Photoshop Masterclass</h3>
+                            <p class="text-sm text-gray-500">Quick Team Academy | Sep 2020</p>
+                            <div class="card-actions justify-end mt-2">
+                                <button class="btn btn-primary btn-sm no-print" onclick="cert_modal_2.showModal()">View Full</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card bg-base-100 shadow-xl">
+                        <figure class="cursor-pointer" onclick="cert_modal_3.showModal()">
+                            <img src="photo/8.jpg" alt="Python Certificate" class="w-full h-48 object-cover"/>
+                        </figure>
+                        <div class="card-body p-6">
+                            <h3 class="card-title text-lg">Introduction to AI</h3>
+                            <p class="text-sm text-gray-500">Coursera | May 2023</p>
+                            <div class="card-actions justify-end mt-2">
+                                <button class="btn btn-primary btn-sm no-print" onclick="cert_modal_3.showModal()">View Full</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">My Portfolio</h2>
+                <div class="flex flex-wrap justify-center gap-2 mb-10 no-print">
+                    <button class="btn btn-sm btn-primary filter-btn" data-filter="all">All</button>
+                    <button class="btn btn-sm btn-outline filter-btn" data-filter="Developer">Developer</button>
+                    <button class="btn btn-sm btn-outline filter-btn" data-filter="Designer">Designer</button>
+                    <button class="btn btn-sm btn-outline filter-btn" data-filter="E-commerce">E-commerce</button>
+                    <button class="btn btn-sm btn-outline filter-btn" data-filter="Branding">Branding</button>
+                </div>
+
+                <div id="project-gallery" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card bg-base-100 shadow-xl project-item" data-tags="Branding,Designer">
+                        <figure><img src="photo/1.png" alt="Corporate Branding" class="w-full h-48 object-cover"/></figure>
+                        <div class="card-body p-6">
+                            <h3 class="card-title">Corporate Branding</h3>
+                            <p>Complete branding package, including logo, color palette, and business cards.</p>
+                            <div class="card-actions justify-end mt-2">
+                                <div class="badge badge-outline">Branding</div>
+                                <div class="badge badge-outline">Designer</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card bg-base-100 shadow-xl project-item" data-tags="HTML,CSS,JavaScript,E-commerce,Developer">
+                        <figure><img src="photo/2.JPG" alt="E-commerce Website" class="w-full h-48 object-cover"/></figure>
+                        <div class="card-body p-6">
+                            <h3 class="card-title">Responsive E-commerce UI</h3>
+                            <p>A responsive e-commerce front-end built with HTML/CSS/JS and a clean UI.</p>
+                            <div class="card-actions justify-end mt-2">
+                                <a href="https://tonmoy100915.github.io/E-Commerce/" target="_blank" class="btn btn-primary btn-sm no-print">Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card bg-base-100 shadow-xl project-item" data-tags="HTML,CSS,JavaScript,Developer">
+                        <figure><img src="photo/4.JPG" alt="Portfolio Website Template" class="w-full h-48 object-cover"/></figure>
+                        <div class="card-body p-6">
+                            <h3 class="card-title">Portfolio Template</h3>
+                            <p>A sleek and animated personal portfolio template built with static web technologies.</p>
+                            <div class="card-actions justify-end mt-2">
+                                <a href="https://tonmoy100915.github.io/Portfolio-/" target="_blank" class="btn btn-primary btn-sm no-print">Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card bg-base-100 shadow-xl project-item" data-tags="E-commerce,Developer">
+                        <figure><img src="photo/6.JPG" alt="Shop Website" class="w-full h-48 object-cover"/></figure>
+                        <div class="card-body p-6">
+                            <h3 class="card-title">Modern Shop Website</h3>
+                            <p>A clean and modern shop website design focusing on product presentation.</p>
+                            <div class="card-actions justify-end mt-2">
+                                <a href="https://tonmoy100915.github.io/my-Smart-Shop/" target="_blank" class="btn btn-primary btn-sm no-print">Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 bg-base-200">
             <div class="container mx-auto px-6">
                 <h2 class="section-title">Get In Touch</h2>
-                <div class="max-w-3xl mx-auto card p-8">
-                    <p class="text-center text-lg mb-8">
-                        I'm currently available for freelance work and new opportunities. If you have a project in mind or just want to say hello, feel free to reach out!
-                    </p>
+                <div class="max-w-3xl mx-auto card bg-base-100 shadow-xl p-8">
+                    <p class="text-center text-lg mb-8">I'm currently available for freelance work and new opportunities. Let's create something great together!</p>
                     <form id="contact-form">
                         <div class="grid md:grid-cols-2 gap-6 mb-6">
-                            <input type="text" placeholder="Your Name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                            <input type="email" placeholder="Your Email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <input type="text" name="name" placeholder="Your Name" class="input input-bordered w-full" required>
+                            <input type="email" name="email" placeholder="Your Email" class="input input-bordered w-full" required>
                         </div>
-                        <textarea placeholder="Your Message" rows="5" class="w-full p-3 border border-gray-300 rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                        <textarea name="message" placeholder="Your Message" rows="5" class="textarea textarea-bordered w-full mb-6" required></textarea>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary w-full md:w-auto">Send Message</button>
                         </div>
                     </form>
-                    <div id="form-message" class="text-center mt-4"></div>
+                    <div id="form-message" class="text-center mt-4 font-semibold"></div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-10">
-        <div class="container mx-auto px-6 text-center">
-            <div class="flex justify-center space-x-6 mb-6">
-                <a href="https://github.com/Tonmoy100915" target="_blank" class="hover:text-blue-400"> <i data-lucide="github" class="w-6 h-6"></i></a>
-                <a href="https://www.linkedin.com/in/mohammad-reza-uddin-tonmoy-902094374/" target="_blank" class="hover:text-blue-400"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
-                <a href="https://dribbble.com/Tonmoy123" target="_blank" class="hover:text-blue-400"><i data-lucide="dribbble" class="w-6 h-6"></i></a>
+    <footer class="footer footer-center p-10 bg-gray-800 text-white">
+        <aside>
+            <p class="font-bold text-xl">Mohmmad Reza Uddin Tonmoy</p>
+            <p>Graphic Designer & Web Developer</p>
+            <p>&copy; 2025. All Rights Reserved.</p>
+        </aside> 
+        <nav>
+            <div class="grid grid-flow-col gap-4">
+                <a href="https://github.com/Tonmoy100915" target="_blank" class="link hover:text-blue-400"><i data-lucide="github" class="w-6 h-6"></i></a>
+                <a href="https://www.linkedin.com/in/mohammad-reza-uddin-tonmoy-902094374/" target="_blank" class="link hover:text-blue-400"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+                <a href="https://dribbble.com/Tonmoy123" target="_blank" class="link hover:text-blue-400"><i data-lucide="dribbble" class="w-6 h-6"></i></a>
             </div>
-            <p>📧Email:md.rezauddin2002@gmail.com 
-                <br>✔WhatsApp: +8801639056199
-            </p>
-            <p>&copy; 2024 Mohmmad Reza Uddin Tonmoy. All Rights Reserved.</p>
-        </div>
+            <p class="text-sm mt-4">📧mdrezauddin_cse31d@portcity.edu.bd | 📞+8801639056199</p>
+        </nav>
     </footer>
 
+    <dialog id="cert_modal_1" class="modal">
+        <div class="modal-box w-11/12 max-w-5xl">
+            <img src="photo/cert-web.png" alt="Responsive Web Design Certificate Full">
+        </div>
+        <form method="dialog" class="modal-backdrop"><button>close</button></form>
+    </dialog>
+    <dialog id="cert_modal_2" class="modal">
+        <div class="modal-box w-11/12 max-w-5xl">
+            <img src="photo/cert-photoshop.png" alt="Adobe Photoshop Certificate Full">
+        </div>
+        <form method="dialog" class="modal-backdrop"><button>close</button></form>
+    </dialog>
+    <dialog id="cert_modal_3" class="modal">
+        <div class="modal-box w-11/12 max-w-5xl">
+            <img src="photo/cert-python.png" alt="Python Certificate Full">
+        </div>
+        <form method="dialog" class="modal-backdrop"><button>close</button></form>
+    </dialog>
+
+
     <script>
-        // Initialize Lucide Icons
-        lucide.createIcons();
+        document.addEventListener('DOMContentLoaded', () => {
+            // Immediately-invoked function expression (IIFE) to avoid polluting the global scope
+            (function() {
+                /** 1. INITIALIZATION **/
+                lucide.createIcons();
 
-        // Mobile Menu Toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+                /** 2. PDF GENERATION (FIXED) **/
+                const printButtonDesktop = document.getElementById('print-cv-desktop');
+                const printButtonMobile = document.getElementById('print-cv-mobile');
+                
+                const generatePDF = (event) => {
+                    const button = event.currentTarget;
+                    const originalText = button.innerHTML;
+                    
+                    // Show loading state
+                    button.innerHTML = `<span class="loading loading-spinner loading-xs"></span> Generating...`;
+                    button.disabled = true;
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+                    const element = document.getElementById('print-area');
+                    const opt = {
+                        margin:       0.5,
+                        filename:     'Mohmmad_Reza_Uddin_Tonmoy_CV.pdf',
+                        image:        { type: 'jpeg', quality: 0.98 },
+                        html2canvas:  { scale: 2, logging: false, dpi: 192, letterRendering: true },
+                        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+                    };
+
+                    // Use html2pdf library to generate and save the PDF
+                    html2pdf().from(element).set(opt).save().then(() => {
+                        // Restore button after PDF is saved
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                        lucide.createIcons(); // Re-render icons if they were part of the button text
+                    });
+                };
+
+                printButtonDesktop.addEventListener('click', generatePDF);
+                printButtonMobile.addEventListener('click', generatePDF);
+
+                /** 3. PORTFOLIO FILTERING LOGIC **/
+                const projectItems = document.querySelectorAll('.project-item');
+                const skillTagsContainer = document.getElementById('skill-tags-container');
+                let allSkills = new Set();
+                
+                // Collect all unique tags from portfolio items
+                projectItems.forEach(item => {
+                    const tags = item.dataset.tags;
+                    if (tags) {
+                        tags.split(',').map(tag => tag.trim()).forEach(tag => {
+                            if (tag) allSkills.add(tag);
+                        });
+                    }
                 });
-                // Close mobile menu on link click
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-            });
-        });
 
-        // Contact Form Submission
-        const contactForm = document.getElementById('contact-form');
-        const formMessage = document.getElementById('form-message');
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            formMessage.textContent = 'Thank you for your message! I will get back to you soon.';
-            formMessage.className = 'text-center mt-4 text-green-600';
-            contactForm.reset();
-            setTimeout(() => {
-                formMessage.textContent = '';
-            }, 5000);
-        });
-        
-        // Header shadow on scroll
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('shadow-lg');
-            } else {
-                header.classList.remove('shadow-lg');
-            }
+                // Create and inject skill buttons into the container
+                allSkills.forEach(skill => {
+                    const button = document.createElement('button');
+                    button.className = 'btn btn-sm btn-outline skill-tag-btn capitalize';
+                    button.textContent = skill;
+                    button.dataset.filter = skill;
+                    skillTagsContainer.appendChild(button);
+                });
+
+                // Add event listeners to all filter buttons (including the newly created ones)
+                const allFilterButtons = document.querySelectorAll('.filter-btn, .skill-tag-btn');
+
+                allFilterButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const filterValue = button.dataset.filter;
+                        
+                        // Update active state for buttons
+                        allFilterButtons.forEach(btn => {
+                            btn.classList.remove('btn-primary');
+                            btn.classList.add('btn-outline');
+                        });
+                        button.classList.add('btn-primary');
+                        button.classList.remove('btn-outline');
+
+                        // Filter portfolio items
+                        projectItems.forEach(item => {
+                            const tags = item.dataset.tags || '';
+                            const shouldShow = filterValue === 'all' || tags.split(',').map(t => t.trim()).includes(filterValue);
+                            item.style.display = shouldShow ? 'block' : 'none';
+                        });
+                    });
+                });
+                
+                // Initialize to show all projects
+                document.querySelector('.filter-btn[data-filter="all"]').click();
+
+
+                /** 4. SMART WELCOME MESSAGE **/
+                const urlParams = new URLSearchParams(window.location.search);
+                const source = urlParams.get('source');
+                const smartMessage = document.getElementById('smart-message');
+                if (source) {
+                    const messages = {
+                        googlerecruiter: "Welcome! I've tailored my portfolio to highlight projects relevant to leading tech companies.",
+                        designagency: "Hello Designer! Check out my work in branding and visual communication."
+                    };
+                    const defaultMessage = `Welcome from ${source.charAt(0).toUpperCase() + source.slice(1)}! Take a look at my work.`;
+                    
+                    document.getElementById('smart-message-text').textContent = messages[source.toLowerCase()] || defaultMessage;
+                    smartMessage.classList.remove('hidden');
+                }
+
+                /** 5. AJAX CONTACT FORM (SMART) **/
+                const contactForm = document.getElementById('contact-form');
+                const formMessage = document.getElementById('form-message');
+
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // IMPORTANT: Replace this with your actual form endpoint from a service like Formspree or Netlify
+                    const formAction = "https://formspree.io/f/YOUR_UNIQUE_ID";
+                    const formData = new FormData(contactForm);
+
+                    formMessage.textContent = "Sending...";
+                    formMessage.className = "text-center mt-4 font-semibold text-info";
+
+                    fetch(formAction, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    }).then(response => {
+                        if (response.ok) {
+                            formMessage.textContent = "Thank you! Your message has been sent successfully.";
+                            formMessage.className = "text-center mt-4 font-semibold text-success";
+                            contactForm.reset();
+                        } else {
+                            throw new Error('Network response was not ok.');
+                        }
+                    }).catch(error => {
+                        formMessage.textContent = "Oops! Something went wrong. Please try again.";
+                        formMessage.className = "text-center mt-4 font-semibold text-error";
+                    });
+                });
+
+            })();
         });
     </script>
 </body>
