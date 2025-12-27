@@ -3,480 +3,485 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohmmad Reza Uddin Tonmoy - Smart Portfolio</title>
+    <title>Mohammad Reza Uddin Tonmoy | CSE Portfolio</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.2/dist/full.min.css" rel="stylesheet" type="text/css" />
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: {
+                        primary: '#2563EB', 
+                        secondary: '#0F172A',
+                        accent: '#3B82F6',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        /* General Styles */
-        body { font-family: 'Inter', sans-serif; }
-        .hero-bg { 
-            background-color: #1f2937; 
-            background-image: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+        body { background-color: #F8FAFC; color: #334155; overflow-x: hidden; }
+        
+        /* Hero Background */
+        .hero-bg {
+            background: radial-gradient(circle at top right, #1e293b 0%, #0f172a 100%);
+            position: relative;
         }
-        .section-title { @apply text-4xl font-extrabold text-gray-800 mb-12 text-center; }
+        .hero-bg::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
 
-        /* Animation for sections */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Scroll Animation Class */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
         }
-        section {
-            animation: fadeIn 0.7s ease-out forwards;
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        /* Styles for PDF/Print Mode */
+        /* Card Styles */
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Print Settings */
         @media print {
-            #header, footer, .no-print { display: none !important; }
-            body { background-color: white !important; }
-            .print-area { margin: 0; padding: 0; width: 100%; box-shadow: none; }
-            .project-item figure { display: none !important; }
-            .project-item { page-break-inside: avoid; }
-            .section-title, h3 { color: #1f2937 !important; }
-            .card { box-shadow: none !important; border: 1px solid #e5e7eb; }
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; }
+            .hero-bg { background: white !important; color: black !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+            a { text-decoration: none !important; color: black !important; }
+            #cv-content { margin: 0; padding: 0; }
         }
     </style>
 </head>
-<body class="text-gray-700 bg-base-200">
+<body class="antialiased">
 
-    <div id="header" class="navbar bg-base-100 shadow-lg sticky top-0 z-50">
+    <div class="navbar bg-white/80 backdrop-blur-lg border-b border-slate-200 sticky top-0 z-50 px-4 md:px-12 no-print transition-all duration-300">
         <div class="navbar-start">
             <div class="dropdown">
-                <div tabindex="0" role="button" class="btn btn-ghost md:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                    <i data-lucide="menu"></i>
                 </div>
-                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 font-medium">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#skills">Skills</a></li>
-                    <li><a href="#certifications">Certifications</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#projects">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><button id="print-cv-mobile" class="btn btn-sm btn-outline btn-warning mt-2 w-full no-print">Print CV</button></li>
                 </ul>
             </div>
-            <a href="#" class="btn btn-ghost text-2xl font-extrabold text-primary">Tonmoy</a>
+            <a href="#" class="text-2xl font-black tracking-tighter text-slate-900 group">
+                TONMOY<span class="text-primary group-hover:text-accent transition-colors">.</span>
+            </a>
         </div>
-        <div class="navbar-center hidden md:flex">
-            <ul class="menu menu-horizontal px-1 font-semibold">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1 font-semibold text-slate-600">
+                <li><a href="#home" class="hover:text-primary hover:bg-transparent">Home</a></li>
+                <li><a href="#about" class="hover:text-primary hover:bg-transparent">About</a></li>
+                <li><a href="#skills" class="hover:text-primary hover:bg-transparent">Skills</a></li>
+                <li><a href="#projects" class="hover:text-primary hover:bg-transparent">Projects</a></li>
+                <li><a href="#contact" class="hover:text-primary hover:bg-transparent">Contact</a></li>
             </ul>
         </div>
-        <div class="navbar-end space-x-2">
-            <button id="print-cv-desktop" class="btn btn-warning btn-sm no-print hidden md:inline-flex">
-                <i data-lucide="printer" class="w-4 h-4"></i> Print CV
+        <div class="navbar-end gap-3">
+            <button onclick="downloadPDF()" class="btn btn-outline btn-sm hidden md:flex hover:bg-slate-900 hover:text-white border-slate-300">
+                <i data-lucide="download" class="w-4 h-4"></i> CV
             </button>
-            <a href="#contact" class="btn btn-primary btn-sm md:btn-md">Hire Me</a>
+            <a href="#contact" class="btn btn-primary btn-sm md:btn-md shadow-lg shadow-blue-500/30 rounded-full px-6 hover:scale-105 transition-transform">Hire Me</a>
         </div>
     </div>
-    
-    <main id="print-area">
+
+    <div id="cv-content">
         
-        <section id="home" class="hero-bg text-white py-20 md:py-32">
-            <div class="container mx-auto px-6 text-center">
-                <img src="photo/0.jpg" alt="Mohmmad Reza Uddin Tonmoy" class="w-40 h-40 rounded-full mx-auto mb-6 border-4 border-primary shadow-xl object-cover"> 
-                <h1 class="text-4xl md:text-6xl font-bold mb-3">Mohmmad Reza Uddin Tonmoy</h1>
-                <p id="smart-tagline" class="text-lg md:text-2xl text-blue-300 mb-8 font-medium">Graphic Designer & Web Developer</p>
-                <div id="smart-message" role="alert" class="alert alert-info max-w-lg mx-auto mb-6 hidden">
-                    <i data-lucide="sparkles" class="w-5 h-5"></i>
-                    <span id="smart-message-text" class="font-semibold text-left"></span>
-                </div>
-                <div class="flex flex-wrap justify-center gap-4 no-print">
-                    <a href="#portfolio" class="btn btn-primary btn-lg">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary btn-lg">Get In Touch</a>
-                </div>
-            </div>
-        </section>
+        <div class="hidden print:block text-center py-8 border-b">
+            <h1 class="text-4xl font-bold">Mohammad Reza Uddin Tonmoy</h1>
+            <p class="text-xl text-slate-600">CSE Undergraduate & Full Stack Developer</p>
+            <p class="text-sm mt-2 text-slate-500">md.rezauddin2002@gmail.com | +880 1639 056199</p>
+        </div>
 
-        <section id="about" class="py-20">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title">About Me & Education</h2>
-                <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-                    <div class="card bg-base-100 shadow-xl p-8">
-                        <h3 class="text-2xl font-bold mb-4 text-primary">Professional Bio</h3>
-                        <p class="text-lg mb-4">Hello! I'm Tonmoy, a passionate and creative individual currently pursuing my studies at <strong>Port City International University</strong>. My journey in the digital world is driven by a dual passion for aesthetics and functionality.</p>
-                        <p class="text-lg mb-4">As a graphic designer, I love bringing ideas to life with visually compelling designs. I enjoy the process of creating something beautiful and meaningful.</p>
-                        <p class="text-lg">As a web developer, I focus on building clean, modern, and user-friendly websites using <strong>AI</strong>, <strong>HTML</strong>, <strong>Tailwind CSS</strong>, and <strong>JavaScript</strong> to deliver an excellent user experience.</p>
+        <section id="home" class="hero-bg min-h-screen flex items-center pt-24 pb-20 relative overflow-hidden">
+            <div class="absolute top-20 right-20 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute bottom-20 left-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+
+            <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+                <div class="text-center lg:text-left reveal active">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700 text-blue-400 text-xs font-bold mb-8 backdrop-blur-sm no-print">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                        </span>
+                        AVAILABLE FOR WORK
                     </div>
-
-                    <div class="card bg-base-100 shadow-xl p-8">
-                        <h3 class="text-2xl font-bold mb-4 text-primary">Education</h3>
-                        <ul class="timeline timeline-vertical">
-                            <li>
-                                <div class="timeline-middle"><i data-lucide="graduation-cap" class="w-5 h-5 text-success"></i></div>
-                                <div class="timeline-end timeline-box bg-base-200 shadow-md p-4 mb-8">
-                                    <h4 class="font-semibold text-lg">Port City International University</h4>
-                                    <p class="text-sm text-gray-500">2023 - Present | Chattogram, Bangladesh</p>
-                                    <p class="mt-2">Focusing on subjects that align with my passion for Computer Science and Engineering.</p>
-                                </div>
-                                <hr/>
-                            </li>
-                            <li>
-                                <div class="timeline-middle"><i data-lucide="school" class="w-5 h-5 text-success"></i></div>
-                                <div class="timeline-end timeline-box bg-base-200 shadow-md p-4 mb-8">
-                                    <h4 class="font-semibold text-lg">HSC</h4>
-                                    <p class="text-sm text-gray-500">2020 - 2022 | Omargani M.E.S College</p>
-                                </div>
-                                <hr/>
-                            </li>
-                            <li>
-                                <div class="timeline-middle"><i data-lucide="school" class="w-5 h-5 text-success"></i></div>
-                                <div class="timeline-end timeline-box bg-base-200 shadow-md p-4">
-                                    <h4 class="font-semibold text-lg">KG to SSC</h4>
-                                    <p class="text-sm text-gray-500">2008 - 2019 | Chattogram Cantonment Board High School</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="skills" class="py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title">Skills Matrix</h2>
-                <div class="max-w-6xl mx-auto">
-                    <p class="text-center text-lg mb-8 font-medium no-print">Click on a skill tag to filter the portfolio below! 👇</p>
-                    <div id="skill-tags-container" class="flex flex-wrap justify-center gap-3 mb-10 no-print"></div>
-
-                    <div class="grid md:grid-cols-3 gap-8">
-                        <div class="card bg-base-100 shadow-xl p-6">
-                            <h3 class="text-xl font-bold mb-2">Web Development</h3>
-                            <p class="text-sm text-gray-500 mb-4">HTML, CSS, JavaScript, Tailwind, DaisyUI, AI</p>
-                            <progress class="progress progress-primary w-full" value="100" max="100"></progress>
-                            <span class="text-sm text-right mt-1 font-semibold">Expert with AI (100%)</span>
-                        </div>
-                        <div class="card bg-base-100 shadow-xl p-6">
-                            <h3 class="text-xl font-bold mb-2">Graphic Design</h3>
-                            <p class="text-sm text-gray-500 mb-4">Photoshop</p>
-                            <progress class="progress progress-secondary w-full" value="90" max="100"></progress>
-                            <span class="text-sm text-right mt-1 font-semibold">Advanced (90%)</span>
-                        </div>
-                        <div class="card bg-base-100 shadow-xl p-6">
-                            <h3 class="text-xl font-bold mb-2">Programming</h3>
-                            <p class="text-sm text-gray-500 mb-4">Python, Basic Concepts</p>
-                            <progress class="progress progress-accent w-full" value="60" max="100"></progress>
-                            <span class="text-sm text-right mt-1 font-semibold">Intermediate (60%)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="certifications" class="py-20 bg-base-200">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title">Certifications</h2>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <div class="card bg-base-100 shadow-xl">
-                        <figure class="cursor-pointer" onclick="cert_modal_1.showModal()">
-                            <img src="photo/9.jpg" alt="Responsive Web Design Certificate" class="w-full h-48 object-cover"/>
-                        </figure>
-                        <div class="card-body p-6">
-                            <h3 class="card-title text-lg">Responsive Web Design</h3>
-                            <p class="text-sm text-gray-500">Programming Hero | Jan 2024</p>
-                            <div class="card-actions justify-end mt-2">
-                                <button class="btn btn-primary btn-sm no-print" onclick="cert_modal_1.showModal()">View Full</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-base-100 shadow-xl">
-                        <figure class="cursor-pointer" onclick="cert_modal_2.showModal()">
-                            <img src="photo/7.jpg" alt="Adobe Photoshop Certificate" class="w-full h-48 object-cover"/>
-                        </figure>
-                        <div class="card-body p-6">
-                            <h3 class="card-title text-lg">Adobe Photoshop Masterclass</h3>
-                            <p class="text-sm text-gray-500">Quick Team Academy | Sep 2020</p>
-                            <div class="card-actions justify-end mt-2">
-                                <button class="btn btn-primary btn-sm no-print" onclick="cert_modal_2.showModal()">View Full</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-base-100 shadow-xl">
-                        <figure class="cursor-pointer" onclick="cert_modal_3.showModal()">
-                            <img src="photo/8.jpg" alt="Python Certificate" class="w-full h-48 object-cover"/>
-                        </figure>
-                        <div class="card-body p-6">
-                            <h3 class="card-title text-lg">Introduction to AI</h3>
-                            <p class="text-sm text-gray-500">Coursera | May 2023</p>
-                            <div class="card-actions justify-end mt-2">
-                                <button class="btn btn-primary btn-sm no-print" onclick="cert_modal_3.showModal()">View Full</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="portfolio" class="py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title">My Portfolio</h2>
-                <div class="flex flex-wrap justify-center gap-2 mb-10 no-print">
-                    <button class="btn btn-sm btn-primary filter-btn" data-filter="all">All</button>
-                    <button class="btn btn-sm btn-outline filter-btn" data-filter="Developer">Developer</button>
-                    <button class="btn btn-sm btn-outline filter-btn" data-filter="Designer">Designer</button>
-                    <button class="btn btn-sm btn-outline filter-btn" data-filter="E-commerce">E-commerce</button>
-                    <button class="btn btn-sm btn-outline filter-btn" data-filter="Branding">Branding</button>
-                </div>
-
-                <div id="project-gallery" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="card bg-base-100 shadow-xl project-item" data-tags="Branding,Designer">
-                        <figure><img src="photo/1.png" alt="Corporate Branding" class="w-full h-48 object-cover"/></figure>
-                        <div class="card-body p-6">
-                            <h3 class="card-title">Corporate Branding</h3>
-                            <p>Complete branding package, including logo, color palette, and business cards.</p>
-                            <div class="card-actions justify-end mt-2">
-                                <div class="badge badge-outline">Branding</div>
-                                <div class="badge badge-outline">Designer</div>
-                            </div>
-                        </div>
+                    <h1 class="text-5xl lg:text-7xl font-extrabold text-white mb-6 leading-tight tracking-tight">
+                        Transforming <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Logic into Legacy</span>
+                    </h1>
+                    <p class="text-lg text-slate-300 mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                        I am <strong>Reza Uddin Tonmoy</strong>, a Computer Science visionary blending the precision of low-level architecture with the creativity of modern web development.
+                    </p>
+                    
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 no-print">
+                        <a href="#projects" class="btn btn-primary btn-lg border-none shadow-blue-500/25 shadow-xl rounded-full px-8 hover:-translate-y-1 transition-transform">Explore Work</a>
+                        <a href="#contact" class="btn btn-outline text-white hover:bg-white hover:text-slate-900 btn-lg rounded-full px-8">Contact Me</a>
                     </div>
                     
-                    <div class="card bg-base-100 shadow-xl project-item" data-tags="HTML,CSS,JavaScript,E-commerce,Developer">
-                        <figure><img src="photo/2.JPG" alt="E-commerce Website" class="w-full h-48 object-cover"/></figure>
-                        <div class="card-body p-6">
-                            <h3 class="card-title">Responsive E-commerce UI</h3>
-                            <p>A responsive e-commerce front-end built with HTML/CSS/JS and a clean UI.</p>
-                            <div class="card-actions justify-end mt-2">
-                                <a href="https://tonmoy100915.github.io/E-Commerce/" target="_blank" class="btn btn-primary btn-sm no-print">Live Demo</a>
-                            </div>
+                    <div class="mt-16 flex justify-center lg:justify-start gap-12 border-t border-slate-700/50 pt-8 text-slate-400">
+                        <div>
+                            <span class="block text-3xl font-bold text-white">3.60</span>
+                            <span class="text-xs font-bold tracking-widest uppercase">CGPA</span>
+                        </div>
+                        <div>
+                            <span class="block text-3xl font-bold text-white">CR</span>
+                            <span class="text-xs font-bold tracking-widest uppercase">Leadership</span>
+                        </div>
+                        <div>
+                            <span class="block text-3xl font-bold text-white">5+</span>
+                            <span class="text-xs font-bold tracking-widest uppercase">Projects</span>
                         </div>
                     </div>
-
-                    <div class="card bg-base-100 shadow-xl project-item" data-tags="HTML,CSS,JavaScript,Developer">
-                        <figure><img src="photo/4.JPG" alt="Portfolio Website Template" class="w-full h-48 object-cover"/></figure>
-                        <div class="card-body p-6">
-                            <h3 class="card-title">Portfolio Template</h3>
-                            <p>A sleek and animated personal portfolio template built with static web technologies.</p>
-                            <div class="card-actions justify-end mt-2">
-                                <a href="https://tonmoy100915.github.io/Portfolio-/" target="_blank" class="btn btn-primary btn-sm no-print">Live Demo</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card bg-base-100 shadow-xl project-item" data-tags="E-commerce,Developer">
-                        <figure><img src="photo/6.JPG" alt="Shop Website" class="w-full h-48 object-cover"/></figure>
-                        <div class="card-body p-6">
-                            <h3 class="card-title">Modern Shop Website</h3>
-                            <p>A clean and modern shop website design focusing on product presentation.</p>
-                            <div class="card-actions justify-end mt-2">
-                                <a href="https://tonmoy100915.github.io/my-Smart-Shop/" target="_blank" class="btn btn-primary btn-sm no-print">Live Demo</a>
-                            </div>
-                        </div>
+                </div>
+                
+                <div class="relative flex justify-center lg:justify-end no-print reveal">
+                    <div class="relative w-80 h-80 lg:w-[450px] lg:h-[450px] group">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-[2rem] rotate-6 opacity-50 blur-2xl group-hover:rotate-12 transition-all duration-700"></div>
+                        <img src="photo/0.jpg" alt="Tonmoy" class="relative w-full h-full object-cover rounded-[2rem] shadow-2xl border-2 border-white/10 rotate-3 group-hover:rotate-0 transition-all duration-500 bg-slate-800">
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="py-20 bg-base-200">
+        <section id="about" class="py-24 bg-white relative">
             <div class="container mx-auto px-6">
-                <h2 class="section-title">Get In Touch</h2>
-                <div class="max-w-3xl mx-auto card bg-base-100 shadow-xl p-8">
-                    <p class="text-center text-lg mb-8">I'm currently available for freelance work and new opportunities. Let's create something great together!</p>
-                    <form id="contact-form">
-                        <div class="grid md:grid-cols-2 gap-6 mb-6">
-                            <input type="text" name="name" placeholder="Your Name" class="input input-bordered w-full" required>
-                            <input type="email" name="email" placeholder="Your Email" class="input input-bordered w-full" required>
+                <div class="flex flex-col lg:flex-row gap-16 items-start">
+                    <div class="lg:w-3/5 reveal">
+                        <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-8 flex items-center gap-4">
+                            <span class="w-12 h-1.5 bg-primary rounded-full"></span> About Me
+                        </h2>
+                        <div class="prose prose-lg text-slate-600 text-justify leading-relaxed">
+                            <p class="mb-6">
+                                I don't just study Computer Science; I live it. As a dedicated student at <strong>Port City International University</strong>, my goal isn't just to pass exams but to master the fundamental principles that drive technology. I pride myself on having a <strong>holistic understanding</strong> of the computing world.
+                            </p>
+                            <p class="mb-6">
+                                My expertise spans the entire spectrum: from the intricate, low-level logic of <strong>8086 Assembly Language</strong> that speaks directly to hardware, to the high-level, user-centric dynamism of <strong>Full-Stack Web Development</strong>. I understand how a line of code travels from a high-level language down to the processor's registers. This deep, vertical knowledge allows me to write code that is not only functional but optimized and efficient.
+                            </p>
+                            <p>
+                                Beyond technical prowess, I am defined by my leadership. As the <strong>Class Representative (CR)</strong> and a former <strong>Scout Leader</strong>, I have cultivated the ability to lead diverse teams, manage complex schedules, and solve conflicts with empathy and logic. I believe the best software is built by teams that communicate well, and I am the bridge that connects technical depth with collaborative success.
+                            </p>
                         </div>
-                        <textarea name="message" placeholder="Your Message" rows="5" class="textarea textarea-bordered w-full mb-6" required></textarea>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary w-full md:w-auto">Send Message</button>
+                    </div>
+
+                    <div class="lg:w-2/5 w-full grid gap-6 reveal delay-200">
+                        <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition-shadow group">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 bg-blue-100 text-primary rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg text-slate-900">Education</h4>
+                                    <p class="text-sm text-slate-500">B.Sc. in CSE</p>
+                                </div>
+                            </div>
+                            <div class="space-y-2 pl-16">
+                                <p class="text-sm font-medium text-slate-700">Port City International University</p>
+                                <p class="text-sm text-slate-500">Current CGPA: <span class="font-bold text-primary">3.60</span></p>
+                            </div>
                         </div>
-                    </form>
-                    <div id="form-message" class="text-center mt-4 font-semibold"></div>
+
+                        <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition-shadow group">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <i data-lucide="crown" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg text-slate-900">Leadership</h4>
+                                    <p class="text-sm text-slate-500">Key Roles</p>
+                                </div>
+                            </div>
+                            <ul class="pl-16 space-y-2 text-sm text-slate-600">
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-indigo-500 rounded-full"></div> Class Representative (CR)</li>
+                                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-indigo-500 rounded-full"></div> Former Scout Leader</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-    </main>
 
-    <footer class="footer footer-center p-10 bg-gray-800 text-white">
-        <aside>
-            <p class="font-bold text-xl">Mohmmad Reza Uddin Tonmoy</p>
-            <p>Graphic Designer & Web Developer</p>
-            <p>&copy; 2025. All Rights Reserved.</p>
-        </aside> 
-        <nav>
-            <div class="grid grid-flow-col gap-4">
-                <a href="https://github.com/Tonmoy100915" target="_blank" class="link hover:text-blue-400"><i data-lucide="github" class="w-6 h-6"></i></a>
-                <a href="https://www.linkedin.com/in/mohammad-reza-uddin-tonmoy-902094374/" target="_blank" class="link hover:text-blue-400"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
-                <a href="https://dribbble.com/Tonmoy123" target="_blank" class="link hover:text-blue-400"><i data-lucide="dribbble" class="w-6 h-6"></i></a>
+        <section id="projects" class="py-24 bg-slate-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-4xl font-extrabold text-slate-900 mb-3">Featured Projects</h2>
+                    <p class="text-primary font-bold tracking-widest text-xs uppercase">Innovation through Code</p>
+                </div>
+
+                <div class="flex justify-center gap-4 mb-12 no-print reveal">
+                    <button class="px-6 py-2 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-600 hover:bg-primary hover:text-white hover:border-primary transition-all filter-btn active-filter shadow-sm" data-filter="all">All</button>
+                    <button class="px-6 py-2 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-600 hover:bg-primary hover:text-white hover:border-primary transition-all filter-btn shadow-sm" data-filter="fullstack">Full Stack</button>
+                    <button class="px-6 py-2 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-600 hover:bg-primary hover:text-white hover:border-primary transition-all filter-btn shadow-sm" data-filter="frontend">Frontend</button>
+                    <button class="px-6 py-2 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-600 hover:bg-primary hover:text-white hover:border-primary transition-all filter-btn shadow-sm" data-filter="design">Design</button>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <div class="project-card bg-white rounded-3xl overflow-hidden border border-slate-100 h-full flex flex-col group reveal" data-tags="fullstack">
+                        <div class="h-60 overflow-hidden relative bg-slate-900 flex items-center justify-center">
+                            <i data-lucide="plane" class="w-20 h-20 text-slate-700 group-hover:text-white transition-colors duration-500 relative z-10"></i>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-0"></div>
+                            <div class="absolute top-4 right-4 z-20">
+                                <span class="bg-yellow-400 text-yellow-900 text-[10px] font-black px-3 py-1 rounded-full flex items-center gap-1 shadow-lg">
+                                    <i data-lucide="star" class="w-3 h-3 fill-current"></i> FEATURED
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow relative">
+                            <div class="mb-4">
+                                <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">Airline Reservation System</h3>
+                                <p class="text-slate-500 text-sm leading-relaxed mb-4">
+                                    A sophisticated DBMS project simulating a real-world flight booking engine. Built with a powerful Python Flask backend and robust SQLite database.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2.5 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">Python Flask</span>
+                                    <span class="px-2.5 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">SQLite</span>
+                                </div>
+                            </div>
+                            <div class="mt-auto pt-6 border-t border-slate-100">
+                                <button class="w-full py-3 rounded-xl bg-slate-900 text-white font-bold text-sm hover:bg-primary transition-colors shadow-lg shadow-slate-900/10"><a href="https://github.com/Tonmoy100915/Airlines-Ticket-Reservation-System-" target="_blank">View Case Study</a></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card bg-white rounded-3xl overflow-hidden border border-slate-100 h-full flex flex-col group reveal delay-100" data-tags="frontend">
+                        <div class="h-60 overflow-hidden relative">
+                            <img src="photo/2.JPG" alt="Shop UI" class="w-full h-full object-cover transition-transform duration-700">
+                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="text-white font-bold border border-white px-4 py-2 rounded-full">View Demo</span>
+                            </div>
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">Clinte Project</h3>
+                            <p class="text-slate-500 text-sm leading-relaxed mb-4">
+                                A modern, responsive Portfolio frontend interface with clean typography and seamless user experience.
+                            </p>
+                            <div class="mt-auto pt-6 border-t border-slate-100">
+                                <a href="https://tonmoy100915.github.io/Motammim/" target="_blank" class="block w-full text-center py-3 rounded-xl border border-slate-200 text-slate-700 font-bold text-sm hover:border-primary hover:text-primary transition-colors">Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card bg-white rounded-3xl overflow-hidden border border-slate-100 h-full flex flex-col group reveal delay-200" data-tags="design">
+                        <div class="h-60 overflow-hidden relative">
+                            <img src="photo/1.png" alt="Branding" class="w-full h-full object-cover transition-transform duration-700">
+                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="text-white font-bold border border-white px-4 py-2 rounded-full">View Gallery</span>
+                            </div>
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">Corporate Branding</h3>
+                            <p class="text-slate-500 text-sm leading-relaxed mb-4">
+                                A complete visual identity package including logo design, color theory, and stationery mockup.
+                            </p>
+                            <div class="mt-auto pt-6 border-t border-slate-100">
+                                <button class="w-full py-3 rounded-xl border border-slate-200 text-slate-700 font-bold text-sm hover:border-primary hover:text-primary transition-colors">View Gallery</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <p class="text-sm mt-4">📧mdrezauddin_cse31d@portcity.edu.bd | 📞+8801639056199</p>
-        </nav>
+        </section>
+
+        <section id="contact" class="py-24 bg-white">
+            <div class="container mx-auto px-6 reveal">
+                <div class="max-w-6xl mx-auto bg-slate-900 rounded-[3rem] overflow-hidden shadow-2xl flex flex-col lg:flex-row min-h-[600px]">
+                    <div class="lg:w-1/2 p-12 lg:p-16 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                        <div class="absolute -top-24 -right-24 w-64 h-64 bg-primary rounded-full blur-[100px] opacity-50"></div>
+                        
+                        <div class="relative z-10">
+                            <h3 class="text-4xl font-bold text-white mb-6">Let's build something <br> <span class="text-primary">extraordinary.</span></h3>
+                            <p class="text-slate-400 text-lg mb-12">I'm currently available for freelance work or full-time opportunities. Drop me a line!</p>
+                            
+                            <div class="space-y-8">
+                                <div class="flex items-start gap-5">
+                                    <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-primary">
+                                        <i data-lucide="mail" class="w-6 h-6"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-slate-400 text-sm mb-1">Email Me</p>
+                                        <p class="text-white font-medium">md.rezauddin2002@gmail.com</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-5">
+                                    <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-primary">
+                                        <i data-lucide="phone" class="w-6 h-6"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-slate-400 text-sm mb-1">Call Me</p>
+                                        <p class="text-white font-medium">+880 1639 056199</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 mt-12 relative z-10">
+                            <a href="https://github.com/Tonmoy100915" target="_blank" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-slate-900 transition-all hover:scale-110">
+                                <i data-lucide="github" class="w-5 h-5"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/mohammad-reza-uddin-tonmoy-902094374/" target="_blank" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-slate-900 transition-all hover:scale-110">
+                                <i data-lucide="linkedin" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="lg:w-1/2 bg-white p-12 lg:p-16 flex flex-col justify-center">
+                        <form class="space-y-6">
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="form-control">
+                                    <label class="text-xs font-bold text-slate-500 uppercase mb-2">Name</label>
+                                    <input type="text" placeholder="John Doe" class="w-full px-4 py-4 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-primary focus:ring-4 focus:ring-blue-500/10 transition-all" />
+                                </div>
+                                <div class="form-control">
+                                    <label class="text-xs font-bold text-slate-500 uppercase mb-2">Email</label>
+                                    <input type="email" placeholder="john@example.com" class="w-full px-4 py-4 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-primary focus:ring-4 focus:ring-blue-500/10 transition-all" />
+                                </div>
+                            </div>
+                            <div class="form-control">
+                                <label class="text-xs font-bold text-slate-500 uppercase mb-2">Message</label>
+                                <textarea placeholder="Tell me about your project..." class="w-full px-4 py-4 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-primary focus:ring-4 focus:ring-blue-500/10 transition-all h-32 resize-none"></textarea>
+                            </div>
+                            <button class="w-full py-4 rounded-xl bg-primary text-white font-bold text-lg hover:bg-blue-700 transition-colors shadow-xl shadow-blue-500/20">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="bg-white border-t border-slate-100 py-12 no-print">
+        <div class="container mx-auto px-6 text-center">
+            <a href="#" class="text-2xl font-black tracking-tighter text-slate-900 inline-block mb-4">
+                TONMOY<span class="text-primary">.</span>
+            </a>
+            <p class="text-slate-500 mb-8 max-w-md mx-auto">
+                Designing seamless user experiences and robust backend systems for the web of tomorrow.
+            </p>
+            <div class="text-sm text-slate-400">
+                &copy; 2025 Mohammad Reza Uddin Tonmoy. Crafted with <span class="text-red-500 animate-pulse">♥</span> in Chattogram.
+            </div>
+        </div>
     </footer>
 
-    <dialog id="cert_modal_1" class="modal">
-        <div class="modal-box w-11/12 max-w-5xl">
-            <img src="photo/cert-web.png" alt="Responsive Web Design Certificate Full">
-        </div>
-        <form method="dialog" class="modal-backdrop"><button>close</button></form>
-    </dialog>
-    <dialog id="cert_modal_2" class="modal">
-        <div class="modal-box w-11/12 max-w-5xl">
-            <img src="photo/cert-photoshop.png" alt="Adobe Photoshop Certificate Full">
-        </div>
-        <form method="dialog" class="modal-backdrop"><button>close</button></form>
-    </dialog>
-    <dialog id="cert_modal_3" class="modal">
-        <div class="modal-box w-11/12 max-w-5xl">
-            <img src="photo/cert-python.png" alt="Python Certificate Full">
-        </div>
-        <form method="dialog" class="modal-backdrop"><button>close</button></form>
-    </dialog>
-
-
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Immediately-invoked function expression (IIFE) to avoid polluting the global scope
-            (function() {
-                /** 1. INITIALIZATION **/
-                lucide.createIcons();
+        lucide.createIcons();
 
-                /** 2. PDF GENERATION (FIXED) **/
-                const printButtonDesktop = document.getElementById('print-cv-desktop');
-                const printButtonMobile = document.getElementById('print-cv-mobile');
-                
-                const generatePDF = (event) => {
-                    const button = event.currentTarget;
-                    const originalText = button.innerHTML;
-                    
-                    // Show loading state
-                    button.innerHTML = `<span class="loading loading-spinner loading-xs"></span> Generating...`;
-                    button.disabled = true;
+        // Scroll Animation Logic
+        const observerOptions = {
+            threshold: 0.1
+        };
 
-                    const element = document.getElementById('print-area');
-                    const opt = {
-                        margin:       0.5,
-                        filename:     'Mohmmad_Reza_Uddin_Tonmoy_CV.pdf',
-                        image:        { type: 'jpeg', quality: 0.98 },
-                        html2canvas:  { scale: 2, logging: false, dpi: 192, letterRendering: true },
-                        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-                    };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
 
-                    // Use html2pdf library to generate and save the PDF
-                    html2pdf().from(element).set(opt).save().then(() => {
-                        // Restore button after PDF is saved
-                        button.innerHTML = originalText;
-                        button.disabled = false;
-                        lucide.createIcons(); // Re-render icons if they were part of the button text
-                    });
-                };
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-                printButtonDesktop.addEventListener('click', generatePDF);
-                printButtonMobile.addEventListener('click', generatePDF);
+        // Filter Logic
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectItems = document.querySelectorAll('.project-card');
 
-                /** 3. PORTFOLIO FILTERING LOGIC **/
-                const projectItems = document.querySelectorAll('.project-item');
-                const skillTagsContainer = document.getElementById('skill-tags-container');
-                let allSkills = new Set();
-                
-                // Collect all unique tags from portfolio items
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update Buttons
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-primary', 'text-white', 'border-primary');
+                    b.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
+                });
+                btn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
+                btn.classList.add('bg-primary', 'text-white', 'border-primary');
+
+                // Filter Items
+                const value = btn.getAttribute('data-filter');
                 projectItems.forEach(item => {
-                    const tags = item.dataset.tags;
-                    if (tags) {
-                        tags.split(',').map(tag => tag.trim()).forEach(tag => {
-                            if (tag) allSkills.add(tag);
-                        });
+                    if(value === 'all' || item.getAttribute('data-tags') === value) {
+                        item.parentElement.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.95)';
+                        setTimeout(() => item.parentElement.style.display = 'none', 300);
                     }
                 });
-
-                // Create and inject skill buttons into the container
-                allSkills.forEach(skill => {
-                    const button = document.createElement('button');
-                    button.className = 'btn btn-sm btn-outline skill-tag-btn capitalize';
-                    button.textContent = skill;
-                    button.dataset.filter = skill;
-                    skillTagsContainer.appendChild(button);
-                });
-
-                // Add event listeners to all filter buttons (including the newly created ones)
-                const allFilterButtons = document.querySelectorAll('.filter-btn, .skill-tag-btn');
-
-                allFilterButtons.forEach(button => {
-                    button.addEventListener('click', () => {
-                        const filterValue = button.dataset.filter;
-                        
-                        // Update active state for buttons
-                        allFilterButtons.forEach(btn => {
-                            btn.classList.remove('btn-primary');
-                            btn.classList.add('btn-outline');
-                        });
-                        button.classList.add('btn-primary');
-                        button.classList.remove('btn-outline');
-
-                        // Filter portfolio items
-                        projectItems.forEach(item => {
-                            const tags = item.dataset.tags || '';
-                            const shouldShow = filterValue === 'all' || tags.split(',').map(t => t.trim()).includes(filterValue);
-                            item.style.display = shouldShow ? 'block' : 'none';
-                        });
-                    });
-                });
-                
-                // Initialize to show all projects
-                document.querySelector('.filter-btn[data-filter="all"]').click();
-
-
-                /** 4. SMART WELCOME MESSAGE **/
-                const urlParams = new URLSearchParams(window.location.search);
-                const source = urlParams.get('source');
-                const smartMessage = document.getElementById('smart-message');
-                if (source) {
-                    const messages = {
-                        googlerecruiter: "Welcome! I've tailored my portfolio to highlight projects relevant to leading tech companies.",
-                        designagency: "Hello Designer! Check out my work in branding and visual communication."
-                    };
-                    const defaultMessage = `Welcome from ${source.charAt(0).toUpperCase() + source.slice(1)}! Take a look at my work.`;
-                    
-                    document.getElementById('smart-message-text').textContent = messages[source.toLowerCase()] || defaultMessage;
-                    smartMessage.classList.remove('hidden');
-                }
-
-                /** 5. AJAX CONTACT FORM (SMART) **/
-                const contactForm = document.getElementById('contact-form');
-                const formMessage = document.getElementById('form-message');
-
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    // IMPORTANT: Replace this with your actual form endpoint from a service like Formspree or Netlify
-                    const formAction = "https://formspree.io/f/YOUR_UNIQUE_ID";
-                    const formData = new FormData(contactForm);
-
-                    formMessage.textContent = "Sending...";
-                    formMessage.className = "text-center mt-4 font-semibold text-info";
-
-                    fetch(formAction, {
-                        method: 'POST',
-                        body: formData,
-                        headers: { 'Accept': 'application/json' }
-                    }).then(response => {
-                        if (response.ok) {
-                            formMessage.textContent = "Thank you! Your message has been sent successfully.";
-                            formMessage.className = "text-center mt-4 font-semibold text-success";
-                            contactForm.reset();
-                        } else {
-                            throw new Error('Network response was not ok.');
-                        }
-                    }).catch(error => {
-                        formMessage.textContent = "Oops! Something went wrong. Please try again.";
-                        formMessage.className = "text-center mt-4 font-semibold text-error";
-                    });
-                });
-
-            })();
+            });
         });
+
+        // PDF Function
+        function downloadPDF() {
+            const element = document.getElementById('cv-content');
+            const btn = document.querySelector('button[onclick="downloadPDF()"]');
+            const originalContent = btn.innerHTML;
+            
+            btn.innerHTML = '<span class="loading loading-spinner loading-xs"></span>';
+            btn.disabled = true;
+            document.body.classList.add('printing');
+
+            const opt = {
+                margin: 0,
+                filename: 'Tonmoy_CV.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().from(element).set(opt).save().then(() => {
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+                document.body.classList.remove('printing');
+            });
+        }
     </script>
 </body>
 </html>
