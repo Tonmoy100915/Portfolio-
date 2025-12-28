@@ -75,10 +75,18 @@
             transform: translateY(-10px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
+        
+        /* Filter Button Active State */
         .filter-btn.active-filter {
             background-color: #2563EB;
             color: white;
             border-color: #2563EB;
+        }
+
+        /* Fix for mobile text overflow */
+        .break-anywhere {
+            overflow-wrap: anywhere;
+            word-break: break-word;
         }
 
         /* Print Settings */
@@ -93,11 +101,11 @@
 </head>
 <body class="antialiased">
 
-    <div class="navbar bg-white/80 backdrop-blur-lg border-b border-slate-200 sticky top-0 z-50 px-4 md:px-12 no-print transition-all duration-300">
+    <div class="navbar bg-white/80 backdrop-blur-lg border-b border-slate-200 sticky top-0 z-50 px-2 md:px-12 no-print transition-all duration-300">
         <div class="navbar-start">
             <div class="dropdown">
-                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-                    <i data-lucide="menu"></i>
+                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden pl-0">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
                 </div>
                 <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 font-medium">
                     <li><a href="#home">Home</a></li>
@@ -107,7 +115,7 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
-            <a href="#" class="text-2xl font-black tracking-tighter text-slate-900 group">
+            <a href="#" class="text-xl md:text-2xl font-black tracking-tighter text-slate-900 group ml-1 md:ml-0">
                 TONMOY<span class="text-primary group-hover:text-accent transition-colors">.</span>
             </a>
         </div>
@@ -120,11 +128,11 @@
                 <li><a href="#contact" class="hover:text-primary hover:bg-transparent">Contact</a></li>
             </ul>
         </div>
-        <div class="navbar-end gap-3">
+        <div class="navbar-end gap-2">
             <button onclick="downloadPDF()" class="btn btn-outline btn-sm hidden md:flex hover:bg-slate-900 hover:text-white border-slate-300">
                 <i data-lucide="download" class="w-4 h-4"></i> CV
             </button>
-            <a href="#contact" class="btn btn-primary btn-sm md:btn-md shadow-lg shadow-blue-500/30 rounded-full px-6 hover:scale-105 transition-transform">Hire Me</a>
+            <a href="#contact" class="btn btn-primary btn-sm shadow-lg shadow-blue-500/30 rounded-full px-4 md:px-6 hover:scale-105 transition-transform">Hire Me</a>
         </div>
     </div>
 
@@ -136,50 +144,50 @@
             <p class="text-sm mt-2 text-slate-500">md.rezauddin2002@gmail.com | +880 1639 056199</p>
         </div>
 
-        <section id="home" class="hero-bg min-h-screen flex items-center pt-24 pb-20 relative overflow-hidden">
-            <div class="absolute top-20 right-20 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-float"></div>
-            <div class="absolute bottom-20 left-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+        <section id="home" class="hero-bg min-h-screen flex items-center pt-10 pb-20 relative overflow-hidden">
+            <div class="absolute top-20 right-20 w-40 h-40 md:w-72 md:h-72 bg-blue-500/20 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute bottom-20 left-20 w-60 h-60 md:w-96 md:h-96 bg-purple-500/20 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
 
-            <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10">
-                <div class="text-center lg:text-left reveal active">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700 text-blue-400 text-xs font-bold mb-8 backdrop-blur-sm no-print">
+            <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
+                <div class="text-center lg:text-left reveal active order-2 lg:order-1">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700 text-blue-400 text-[10px] md:text-xs font-bold mb-6 backdrop-blur-sm no-print">
                         <span class="relative flex h-2 w-2">
                           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                           <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                         </span>
                         AVAILABLE FOR WORK
                     </div>
-                    <h1 class="text-5xl lg:text-7xl font-extrabold text-white mb-6 leading-tight tracking-tight">
+                    <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mb-4 lg:mb-6 leading-tight tracking-tight">
                         Transforming <br>
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Logic into Legacy</span>
                     </h1>
-                    <p class="text-lg text-slate-300 mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                    <p class="text-base md:text-lg text-slate-300 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
                         I am <strong>Reza Uddin Tonmoy</strong>, a Computer Science visionary blending the precision of low-level architecture with the creativity of modern web development.
                     </p>
                     
                     <div class="flex flex-wrap justify-center lg:justify-start gap-4 no-print">
-                        <a href="#projects" class="btn btn-primary btn-lg border-none shadow-blue-500/25 shadow-xl rounded-full px-8 hover:-translate-y-1 transition-transform">Explore Work</a>
-                        <a href="#contact" class="btn btn-outline text-white hover:bg-white hover:text-slate-900 btn-lg rounded-full px-8">Contact Me</a>
+                        <a href="#projects" class="btn btn-primary btn-md lg:btn-lg border-none shadow-blue-500/25 shadow-xl rounded-full px-8 hover:-translate-y-1 transition-transform">Explore Work</a>
+                        <a href="#contact" class="btn btn-outline text-white hover:bg-white hover:text-slate-900 btn-md lg:btn-lg rounded-full px-8">Contact Me</a>
                     </div>
                     
-                    <div class="mt-16 flex justify-center lg:justify-start gap-12 border-t border-slate-700/50 pt-8 text-slate-400">
+                    <div class="mt-12 flex justify-center lg:justify-start gap-8 md:gap-12 border-t border-slate-700/50 pt-8 text-slate-400">
                         <div>
-                            <span class="block text-3xl font-bold text-white">3.60</span>
-                            <span class="text-xs font-bold tracking-widest uppercase">CGPA</span>
+                            <span class="block text-2xl md:text-3xl font-bold text-white">3.60</span>
+                            <span class="text-[10px] md:text-xs font-bold tracking-widest uppercase">CGPA</span>
                         </div>
                         <div>
-                            <span class="block text-3xl font-bold text-white">CR</span>
-                            <span class="text-xs font-bold tracking-widest uppercase">Leadership</span>
+                            <span class="block text-2xl md:text-3xl font-bold text-white">CR</span>
+                            <span class="text-[10px] md:text-xs font-bold tracking-widest uppercase">Leadership</span>
                         </div>
                         <div>
-                            <span class="block text-3xl font-bold text-white">5+</span>
-                            <span class="text-xs font-bold tracking-widest uppercase">Projects</span>
+                            <span class="block text-2xl md:text-3xl font-bold text-white">5+</span>
+                            <span class="text-[10px] md:text-xs font-bold tracking-widest uppercase">Projects</span>
                         </div>
                     </div>
                 </div>
                 
-                <div class="relative flex justify-center lg:justify-end no-print reveal">
-                    <div class="relative w-80 h-80 lg:w-[450px] lg:h-[450px] group">
+                <div class="relative flex justify-center lg:justify-end no-print reveal order-1 lg:order-2">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px] group">
                         <div class="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-[2rem] rotate-6 opacity-50 blur-2xl group-hover:rotate-12 transition-all duration-700"></div>
                         <img src="photo/0.jpg" alt="Tonmoy" class="relative w-full h-full object-cover rounded-[2rem] shadow-2xl border-2 border-white/10 rotate-3 group-hover:rotate-0 transition-all duration-500 bg-slate-800">
                     </div>
@@ -187,14 +195,14 @@
             </div>
         </section>
 
-        <section id="about" class="py-24 bg-white relative">
+        <section id="about" class="py-20 bg-white relative">
             <div class="container mx-auto px-6">
-                <div class="flex flex-col lg:flex-row gap-16 items-start">
+                <div class="flex flex-col lg:flex-row gap-12 items-start">
                     <div class="lg:w-3/5 reveal">
-                        <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-8 flex items-center gap-4">
-                            <span class="w-12 h-1.5 bg-primary rounded-full"></span> About Me
+                        <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-6 flex items-center gap-4 justify-center lg:justify-start">
+                            <span class="w-10 h-1.5 bg-primary rounded-full"></span> About Me
                         </h2>
-                        <div class="prose prose-lg text-slate-600 text-justify leading-relaxed">
+                        <div class="prose prose-lg text-slate-600 text-justify leading-relaxed mx-auto lg:mx-0">
                             <p class="mb-6">
                                 I don't just study Computer Science; I live it. As a dedicated student at <strong>Port City International University</strong>, my goal isn't just to pass exams but to master the fundamental principles that drive technology. I pride myself on having a <strong>holistic understanding</strong> of the computing world.
                             </p>
@@ -208,7 +216,7 @@
                     </div>
 
                     <div class="lg:w-2/5 w-full grid gap-6 reveal delay-200">
-                        <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition-shadow group">
+                        <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100 hover:shadow-xl transition-shadow group">
                             <div class="flex items-center gap-4 mb-4">
                                 <div class="w-12 h-12 bg-blue-100 text-primary rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
                                     <i data-lucide="graduation-cap" class="w-6 h-6"></i>
@@ -224,7 +232,7 @@
                             </div>
                         </div>
 
-                        <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition-shadow group">
+                        <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100 hover:shadow-xl transition-shadow group">
                             <div class="flex items-center gap-4 mb-4">
                                 <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
                                     <i data-lucide="crown" class="w-6 h-6"></i>
@@ -244,69 +252,93 @@
             </div>
         </section>
 
-        <section id="skills" class="py-20 bg-slate-50">
-            <div class="container mx-auto px-6 reveal">
-                <h2 class="text-3xl font-bold text-center mb-12">Technical Expertise</h2>
-                <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                    <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-                        <div class="flex items-center gap-3 mb-4">
-                            <i data-lucide="code-2" class="text-red-500"></i>
-                            <h3 class="font-bold text-lg">Programming</h3>
+        <section id="skills" class="py-24 bg-slate-50 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-purple-100 rounded-full blur-3xl opacity-50 translate-y-1/2 -translate-x-1/2"></div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-4xl font-extrabold text-slate-900 mb-4">Technical <span class="text-primary">Arsenal</span></h2>
+                    <p class="text-slate-500 max-w-2xl mx-auto">A comprehensive toolkit of languages, frameworks, and technologies I use to bring ideas to life.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                    
+                    <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 hover:border-red-500/30 transition-all hover:-translate-y-2 duration-300 group reveal delay-100">
+                        <div class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center text-red-500 mb-6 group-hover:scale-110 transition-transform">
+                            <i data-lucide="code-2" class="w-8 h-8"></i>
                         </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-4">Programming</h3>
                         <div class="flex flex-wrap gap-2">
-                            <span class="badge badge-ghost">C</span>
-                            <span class="badge badge-ghost">C++</span>
-                            <span class="badge badge-ghost">Python</span>
-                            <span class="badge badge-ghost">8086 Assembly</span>
+                            <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-red-500 hover:text-white hover:border-red-500 transition-colors cursor-default">C</span>
+                            <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-red-500 hover:text-white hover:border-red-500 transition-colors cursor-default">C++</span>
+                            <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-red-500 hover:text-white hover:border-red-500 transition-colors cursor-default">Python</span>
+                            <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-red-500 hover:text-white hover:border-red-500 transition-colors cursor-default">JavaScript</span>
+                            <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-red-500 hover:text-white hover:border-red-500 transition-colors cursor-default">8086 Assembly</span>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-                        <div class="flex items-center gap-3 mb-4">
-                            <i data-lucide="globe" class="text-blue-500"></i>
-                            <h3 class="font-bold text-lg">Web Stack</h3>
+
+                    <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 hover:border-blue-500/30 transition-all hover:-translate-y-2 duration-300 group reveal delay-200">
+                        <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-500 mb-6 group-hover:scale-110 transition-transform">
+                            <i data-lucide="globe" class="w-8 h-8"></i>
                         </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-4">Web Dev</h3>
                         <div class="flex flex-wrap gap-2">
-                            <span class="badge badge-ghost">HTML/CSS</span>
-                            <span class="badge badge-ghost">JavaScript</span>
-                            <span class="badge badge-ghost">Tailwind</span>
-                            <span class="badge badge-ghost">Flask</span>
+                            <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-colors cursor-default">HTML5</span>
+                            <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-colors cursor-default">CSS3</span>
+                            <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-colors cursor-default">Tailwind</span>
+                            <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-colors cursor-default">DaisyUI</span>
+                            <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-colors cursor-default">Flask</span>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-                        <div class="flex items-center gap-3 mb-4">
-                            <i data-lucide="database" class="text-purple-500"></i>
-                            <h3 class="font-bold text-lg">Tools</h3>
+
+                    <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 hover:border-emerald-500/30 transition-all hover:-translate-y-2 duration-300 group reveal delay-300">
+                        <div class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-500 mb-6 group-hover:scale-110 transition-transform">
+                            <i data-lucide="database" class="w-8 h-8"></i>
                         </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-4">Database</h3>
                         <div class="flex flex-wrap gap-2">
-                            <span class="badge badge-ghost">MySQL</span>
-                            <span class="badge badge-ghost">SQLite</span>
-                            <span class="badge badge-ghost">Git</span>
-                            <span class="badge badge-ghost">Photoshop</span>
+                            <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-colors cursor-default">MySQL</span>
+                            <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-colors cursor-default">SQLite</span>
                         </div>
                     </div>
+
+                    <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 hover:border-purple-500/30 transition-all hover:-translate-y-2 duration-300 group reveal delay-400">
+                        <div class="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-500 mb-6 group-hover:scale-110 transition-transform">
+                            <i data-lucide="wrench" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-4">Tools & Design</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-purple-500 hover:text-white hover:border-purple-500 transition-colors cursor-default">Git & GitHub</span>
+                            <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-purple-500 hover:text-white hover:border-purple-500 transition-colors cursor-default">VS Code</span>
+                            <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-purple-500 hover:text-white hover:border-purple-500 transition-colors cursor-default">Photoshop</span>
+                            <span class="px-3 py-1.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-purple-500 hover:text-white hover:border-purple-500 transition-colors cursor-default">LaTeX</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="py-24 bg-white">
+        <section id="projects" class="py-20 bg-white">
             <div class="container mx-auto px-6">
-                <div class="text-center mb-16 reveal">
-                    <h2 class="text-4xl font-extrabold text-slate-900 mb-3">Featured Projects</h2>
+                <div class="text-center mb-12 reveal">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">Featured Projects</h2>
                     <p class="text-primary font-bold tracking-widest text-xs uppercase">Innovation through Code</p>
                 </div>
 
-                <div class="flex justify-center gap-3 mb-12 no-print reveal">
-                    <button class="px-6 py-2 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-600 hover:bg-primary hover:text-white hover:border-primary transition-all filter-btn active-filter shadow-sm" data-filter="all">All</button>
-                    <button class="px-6 py-2 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-600 hover:bg-primary hover:text-white hover:border-primary transition-all filter-btn shadow-sm" data-filter="fullstack">Full Stack</button>
-                    <button class="px-6 py-2 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-600 hover:bg-primary hover:text-white hover:border-primary transition-all filter-btn shadow-sm" data-filter="frontend">Frontend</button>
-                    <button class="px-6 py-2 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-600 hover:bg-primary hover:text-white hover:border-primary transition-all filter-btn shadow-sm" data-filter="design">Design</button>
+                <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-12 no-print reveal">
+                    <button class="px-4 py-2 md:px-6 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-600 hover:bg-primary hover:text-white hover:border-primary transition-all filter-btn active-filter shadow-sm" data-filter="all">All</button>
+                    <button class="px-4 py-2 md:px-6 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-600 hover:bg-primary hover:text-white hover:border-primary transition-all filter-btn shadow-sm" data-filter="fullstack">Full Stack</button>
+                    <button class="px-4 py-2 md:px-6 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-600 hover:bg-primary hover:text-white hover:border-primary transition-all filter-btn shadow-sm" data-filter="frontend">Frontend</button>
+                    <button class="px-4 py-2 md:px-6 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-600 hover:bg-primary hover:text-white hover:border-primary transition-all filter-btn shadow-sm" data-filter="design">Design</button>
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     
                     <div class="project-card bg-white rounded-3xl overflow-hidden border border-slate-100 h-full flex flex-col group reveal" data-tags="fullstack">
-                        <div class="h-60 overflow-hidden relative bg-slate-900 flex items-center justify-center">
-                            <i data-lucide="plane" class="w-20 h-20 text-slate-700 group-hover:text-white transition-colors duration-500 relative z-10"></i>
+                        <div class="h-56 overflow-hidden relative bg-slate-900 flex items-center justify-center">
+                            <i data-lucide="plane" class="w-16 h-16 md:w-20 md:h-20 text-slate-700 group-hover:text-white transition-colors duration-500 relative z-10"></i>
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-0"></div>
                             <div class="absolute top-4 right-4 z-20">
                                 <span class="bg-yellow-400 text-yellow-900 text-[10px] font-black px-3 py-1 rounded-full flex items-center gap-1 shadow-lg">
@@ -314,9 +346,9 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="p-8 flex flex-col flex-grow relative">
+                        <div class="p-6 md:p-8 flex flex-col flex-grow relative">
                             <div class="mb-4">
-                                <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">Airline Reservation System</h3>
+                                <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">Airline Reservation System</h3>
                                 <p class="text-slate-500 text-sm leading-relaxed mb-4">
                                     A sophisticated DBMS project simulating a real-world flight booking engine. Built with a powerful Python Flask backend and robust SQLite database.
                                 </p>
@@ -332,32 +364,32 @@
                     </div>
 
                     <div class="project-card bg-white rounded-3xl overflow-hidden border border-slate-100 h-full flex flex-col group reveal delay-100" data-tags="frontend">
-                        <div class="h-60 overflow-hidden relative">
+                        <div class="h-56 overflow-hidden relative">
                             <img src="photo/2.JPG" alt="Shop UI" class="w-full h-full object-cover transition-transform duration-700">
                             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <span class="text-white font-bold border border-white px-4 py-2 rounded-full">View Demo</span>
                             </div>
                         </div>
-                        <div class="p-8 flex flex-col flex-grow">
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">Smart Shop UI</h3>
+                        <div class="p-6 md:p-8 flex flex-col flex-grow">
+                            <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">Clinte Project</h3>
                             <p class="text-slate-500 text-sm leading-relaxed mb-4">
-                                A modern, responsive e-commerce frontend interface with clean typography and seamless user experience.
+                                A modern, responsive Portfolio frontend interface with clean typography and seamless user experience.
                             </p>
                             <div class="mt-auto pt-6 border-t border-slate-100">
-                                <a href="https://tonmoy100915.github.io/my-Smart-Shop/" target="_blank" class="block w-full text-center py-3 rounded-xl border border-slate-200 text-slate-700 font-bold text-sm hover:border-primary hover:text-primary transition-colors">Live Demo</a>
+                                <a href="https://tonmoy100915.github.io/Motammim/" target="_blank" class="block w-full text-center py-3 rounded-xl border border-slate-200 text-slate-700 font-bold text-sm hover:border-primary hover:text-primary transition-colors">Live Demo</a>
                             </div>
                         </div>
                     </div>
 
                     <div class="project-card bg-white rounded-3xl overflow-hidden border border-slate-100 h-full flex flex-col group reveal delay-200" data-tags="design">
-                        <div class="h-60 overflow-hidden relative">
+                        <div class="h-56 overflow-hidden relative">
                             <img src="photo/1.png" alt="Branding" class="w-full h-full object-cover transition-transform duration-700">
                             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <span class="text-white font-bold border border-white px-4 py-2 rounded-full">View Gallery</span>
                             </div>
                         </div>
-                        <div class="p-8 flex flex-col flex-grow">
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">Corporate Branding</h3>
+                        <div class="p-6 md:p-8 flex flex-col flex-grow">
+                            <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">Corporate Branding</h3>
                             <p class="text-slate-500 text-sm leading-relaxed mb-4">
                                 A complete visual identity package including logo design, color theory, and stationery mockup.
                             </p>
@@ -371,66 +403,66 @@
             </div>
         </section>
 
-        <section id="contact" class="py-24 bg-slate-50">
+        <section id="contact" class="py-20 bg-slate-50">
             <div class="container mx-auto px-6 reveal">
-                <div class="max-w-6xl mx-auto bg-slate-900 rounded-[3rem] overflow-hidden shadow-2xl flex flex-col lg:flex-row min-h-[600px]">
-                    <div class="lg:w-1/2 p-12 lg:p-16 flex flex-col justify-between relative overflow-hidden">
+                <div class="max-w-6xl mx-auto bg-slate-900 rounded-[2rem] overflow-hidden shadow-2xl flex flex-col lg:flex-row min-h-[600px]">
+                    <div class="lg:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-between relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
                         <div class="absolute -top-24 -right-24 w-64 h-64 bg-primary rounded-full blur-[100px] opacity-50"></div>
                         
                         <div class="relative z-10">
-                            <h3 class="text-4xl font-bold text-white mb-6">Let's build something <br> <span class="text-primary">extraordinary.</span></h3>
-                            <p class="text-slate-400 text-lg mb-12">I'm currently available for freelance work or full-time opportunities.</p>
+                            <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">Let's build something <br> <span class="text-primary">extraordinary.</span></h3>
+                            <p class="text-slate-400 text-base md:text-lg mb-8 md:mb-12">I'm currently available for freelance work or full-time opportunities.</p>
                             
-                            <div class="space-y-8">
-                                <div class="flex items-start gap-5">
-                                    <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-primary">
-                                        <i data-lucide="mail" class="w-6 h-6"></i>
+                            <div class="space-y-6 md:space-y-8">
+                                <div class="flex items-start gap-4 md:gap-5">
+                                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-primary">
+                                        <i data-lucide="mail" class="w-5 h-5 md:w-6 md:h-6"></i>
                                     </div>
-                                    <div>
-                                        <p class="text-slate-400 text-sm mb-1">Email Me</p>
-                                        <p class="text-white font-medium">md.rezauddin2002@gmail.com</p>
+                                    <div class="min-w-0 flex-1">
+                                        <p class="text-slate-400 text-xs md:text-sm mb-1">Email Me</p>
+                                        <p class="text-white font-medium break-anywhere text-sm md:text-base">md.rezauddin2002@gmail.com</p>
                                     </div>
                                 </div>
-                                <div class="flex items-start gap-5">
-                                    <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-primary">
-                                        <i data-lucide="phone" class="w-6 h-6"></i>
+                                <div class="flex items-start gap-4 md:gap-5">
+                                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-primary">
+                                        <i data-lucide="phone" class="w-5 h-5 md:w-6 md:h-6"></i>
                                     </div>
                                     <div>
-                                        <p class="text-slate-400 text-sm mb-1">Call Me</p>
-                                        <p class="text-white font-medium">+880 1639 056199</p>
+                                        <p class="text-slate-400 text-xs md:text-sm mb-1">Call Me</p>
+                                        <p class="text-white font-medium text-sm md:text-base">+880 1639 056199</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="flex gap-4 mt-12 relative z-10">
-                            <a href="https://github.com/Tonmoy100915" target="_blank" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-slate-900 transition-all hover:scale-110">
+                        <div class="flex gap-4 mt-8 md:mt-12 relative z-10">
+                            <a href="https://github.com/Tonmoy100915" target="_blank" class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-slate-900 transition-all hover:scale-110">
                                 <i data-lucide="github" class="w-5 h-5"></i>
                             </a>
-                            <a href="https://www.linkedin.com/in/mohammad-reza-uddin-tonmoy-902094374/" target="_blank" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-slate-900 transition-all hover:scale-110">
+                            <a href="https://www.linkedin.com/in/mohammad-reza-uddin-tonmoy-902094374/" target="_blank" class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-slate-900 transition-all hover:scale-110">
                                 <i data-lucide="linkedin" class="w-5 h-5"></i>
                             </a>
                         </div>
                     </div>
 
-                    <div class="lg:w-1/2 bg-white p-12 lg:p-16 flex flex-col justify-center">
+                    <div class="lg:w-1/2 bg-white p-8 md:p-12 lg:p-16 flex flex-col justify-center">
                         <form class="space-y-6">
-                            <div class="grid grid-cols-2 gap-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="form-control">
                                     <label class="text-xs font-bold text-slate-500 uppercase mb-2">Name</label>
-                                    <input type="text" placeholder="John Doe" class="w-full px-4 py-4 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-primary focus:ring-4 focus:ring-blue-500/10 transition-all" />
+                                    <input type="text" placeholder="John Doe" class="w-full px-4 py-3 md:py-4 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-primary focus:ring-4 focus:ring-blue-500/10 transition-all" />
                                 </div>
                                 <div class="form-control">
                                     <label class="text-xs font-bold text-slate-500 uppercase mb-2">Email</label>
-                                    <input type="email" placeholder="john@example.com" class="w-full px-4 py-4 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-primary focus:ring-4 focus:ring-blue-500/10 transition-all" />
+                                    <input type="email" placeholder="john@example.com" class="w-full px-4 py-3 md:py-4 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-primary focus:ring-4 focus:ring-blue-500/10 transition-all" />
                                 </div>
                             </div>
                             <div class="form-control">
                                 <label class="text-xs font-bold text-slate-500 uppercase mb-2">Message</label>
-                                <textarea placeholder="Tell me about your project..." class="w-full px-4 py-4 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-primary focus:ring-4 focus:ring-blue-500/10 transition-all h-32 resize-none"></textarea>
+                                <textarea placeholder="Tell me about your project..." class="w-full px-4 py-3 md:py-4 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-primary focus:ring-4 focus:ring-blue-500/10 transition-all h-32 resize-none"></textarea>
                             </div>
-                            <button class="w-full py-4 rounded-xl bg-primary text-white font-bold text-lg hover:bg-blue-700 transition-colors shadow-xl shadow-blue-500/20">Send Message</button>
+                            <button class="w-full py-3 md:py-4 rounded-xl bg-primary text-white font-bold text-lg hover:bg-blue-700 transition-colors shadow-xl shadow-blue-500/20">Send Message</button>
                         </form>
                     </div>
                 </div>
@@ -439,15 +471,15 @@
 
     </div>
 
-    <footer class="bg-white border-t border-slate-100 py-12 no-print">
+    <footer class="bg-white border-t border-slate-100 py-8 md:py-12 no-print">
         <div class="container mx-auto px-6 text-center">
             <a href="#" class="text-2xl font-black tracking-tighter text-slate-900 inline-block mb-4">
                 TONMOY<span class="text-primary">.</span>
             </a>
-            <p class="text-slate-500 mb-8 max-w-md mx-auto">
+            <p class="text-slate-500 mb-6 md:mb-8 max-w-md mx-auto text-sm md:text-base">
                 Designing seamless user experiences and robust backend systems for the web of tomorrow.
             </p>
-            <div class="text-sm text-slate-400">
+            <div class="text-xs md:text-sm text-slate-400">
                 &copy; 2025 Mohammad Reza Uddin Tonmoy. Crafted with <span class="text-red-500 animate-pulse">♥</span> in Chattogram.
             </div>
         </div>
