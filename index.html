@@ -41,7 +41,7 @@
     <style>
         body { background-color: #F8FAFC; color: #334155; overflow-x: hidden; }
         
-        /* Hero Background */
+        /* Premium Background */
         .hero-bg {
             background: radial-gradient(circle at top right, #1e293b 0%, #0f172a 100%);
             position: relative;
@@ -56,7 +56,7 @@
             pointer-events: none;
         }
 
-        /* Scroll Animation Class */
+        /* Scroll Reveal Animation */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -67,7 +67,7 @@
             transform: translateY(0);
         }
 
-        /* Card Styles */
+        /* Hover Effects */
         .project-card {
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -75,8 +75,10 @@
             transform: translateY(-10px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        .project-card:hover img {
-            transform: scale(1.05);
+        .filter-btn.active-filter {
+            background-color: #2563EB;
+            color: white;
+            border-color: #2563EB;
         }
 
         /* Print Settings */
@@ -85,7 +87,6 @@
             body { background: white !important; color: black !important; }
             .hero-bg { background: white !important; color: black !important; }
             .reveal { opacity: 1 !important; transform: none !important; }
-            a { text-decoration: none !important; color: black !important; }
             #cv-content { margin: 0; padding: 0; }
         }
     </style>
@@ -243,14 +244,58 @@
             </div>
         </section>
 
-        <section id="projects" class="py-24 bg-slate-50">
+        <section id="skills" class="py-20 bg-slate-50">
+            <div class="container mx-auto px-6 reveal">
+                <h2 class="text-3xl font-bold text-center mb-12">Technical Expertise</h2>
+                <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="code-2" class="text-red-500"></i>
+                            <h3 class="font-bold text-lg">Programming</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge badge-ghost">C</span>
+                            <span class="badge badge-ghost">C++</span>
+                            <span class="badge badge-ghost">Python</span>
+                            <span class="badge badge-ghost">8086 Assembly</span>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="globe" class="text-blue-500"></i>
+                            <h3 class="font-bold text-lg">Web Stack</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge badge-ghost">HTML/CSS</span>
+                            <span class="badge badge-ghost">JavaScript</span>
+                            <span class="badge badge-ghost">Tailwind</span>
+                            <span class="badge badge-ghost">Flask</span>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="database" class="text-purple-500"></i>
+                            <h3 class="font-bold text-lg">Tools</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge badge-ghost">MySQL</span>
+                            <span class="badge badge-ghost">SQLite</span>
+                            <span class="badge badge-ghost">Git</span>
+                            <span class="badge badge-ghost">Photoshop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 reveal">
                     <h2 class="text-4xl font-extrabold text-slate-900 mb-3">Featured Projects</h2>
                     <p class="text-primary font-bold tracking-widest text-xs uppercase">Innovation through Code</p>
                 </div>
 
-                <div class="flex justify-center gap-4 mb-12 no-print reveal">
+                <div class="flex justify-center gap-3 mb-12 no-print reveal">
                     <button class="px-6 py-2 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-600 hover:bg-primary hover:text-white hover:border-primary transition-all filter-btn active-filter shadow-sm" data-filter="all">All</button>
                     <button class="px-6 py-2 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-600 hover:bg-primary hover:text-white hover:border-primary transition-all filter-btn shadow-sm" data-filter="fullstack">Full Stack</button>
                     <button class="px-6 py-2 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-600 hover:bg-primary hover:text-white hover:border-primary transition-all filter-btn shadow-sm" data-filter="frontend">Frontend</button>
@@ -281,7 +326,7 @@
                                 </div>
                             </div>
                             <div class="mt-auto pt-6 border-t border-slate-100">
-                                <button class="w-full py-3 rounded-xl bg-slate-900 text-white font-bold text-sm hover:bg-primary transition-colors shadow-lg shadow-slate-900/10"><a href="https://github.com/Tonmoy100915/Airlines-Ticket-Reservation-System-" target="_blank">View Case Study</a></button>
+                                <a href="https://github.com/Tonmoy100915/Airlines-Ticket-Reservation-System-" target="_blank" class="block w-full text-center py-3 rounded-xl bg-slate-900 text-white font-bold text-sm hover:bg-primary transition-colors shadow-lg shadow-slate-900/10">View Case Study</a>
                             </div>
                         </div>
                     </div>
@@ -294,12 +339,12 @@
                             </div>
                         </div>
                         <div class="p-8 flex flex-col flex-grow">
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">Clinte Project</h3>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">Smart Shop UI</h3>
                             <p class="text-slate-500 text-sm leading-relaxed mb-4">
-                                A modern, responsive Portfolio frontend interface with clean typography and seamless user experience.
+                                A modern, responsive e-commerce frontend interface with clean typography and seamless user experience.
                             </p>
                             <div class="mt-auto pt-6 border-t border-slate-100">
-                                <a href="https://tonmoy100915.github.io/Motammim/" target="_blank" class="block w-full text-center py-3 rounded-xl border border-slate-200 text-slate-700 font-bold text-sm hover:border-primary hover:text-primary transition-colors">Live Demo</a>
+                                <a href="https://tonmoy100915.github.io/my-Smart-Shop/" target="_blank" class="block w-full text-center py-3 rounded-xl border border-slate-200 text-slate-700 font-bold text-sm hover:border-primary hover:text-primary transition-colors">Live Demo</a>
                             </div>
                         </div>
                     </div>
@@ -326,7 +371,7 @@
             </div>
         </section>
 
-        <section id="contact" class="py-24 bg-white">
+        <section id="contact" class="py-24 bg-slate-50">
             <div class="container mx-auto px-6 reveal">
                 <div class="max-w-6xl mx-auto bg-slate-900 rounded-[3rem] overflow-hidden shadow-2xl flex flex-col lg:flex-row min-h-[600px]">
                     <div class="lg:w-1/2 p-12 lg:p-16 flex flex-col justify-between relative overflow-hidden">
@@ -335,7 +380,7 @@
                         
                         <div class="relative z-10">
                             <h3 class="text-4xl font-bold text-white mb-6">Let's build something <br> <span class="text-primary">extraordinary.</span></h3>
-                            <p class="text-slate-400 text-lg mb-12">I'm currently available for freelance work or full-time opportunities. Drop me a line!</p>
+                            <p class="text-slate-400 text-lg mb-12">I'm currently available for freelance work or full-time opportunities.</p>
                             
                             <div class="space-y-8">
                                 <div class="flex items-start gap-5">
@@ -434,9 +479,11 @@
             btn.addEventListener('click', () => {
                 // Update Buttons
                 filterBtns.forEach(b => {
+                    b.classList.remove('active-filter');
                     b.classList.remove('bg-primary', 'text-white', 'border-primary');
                     b.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
                 });
+                btn.classList.add('active-filter');
                 btn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
                 btn.classList.add('bg-primary', 'text-white', 'border-primary');
 
